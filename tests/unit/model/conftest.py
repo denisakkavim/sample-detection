@@ -9,7 +9,7 @@ def sample_rate():
 
 @pytest.fixture
 def audio(sample_rate):
-    return np.array([0 for i in range(sample_rate * 60)])
+    return np.array([np.float32(0) for i in range(sample_rate * 60)])
 
 
 @pytest.fixture
@@ -20,3 +20,8 @@ def start_time():
 @pytest.fixture
 def clip_length():
     return 15
+
+
+@pytest.fixture
+def min_negatives():
+    return 1
