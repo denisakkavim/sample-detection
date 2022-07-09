@@ -12,6 +12,7 @@ from sample_detection.model.sample_loader import SampleLoader
 class EmbeddingGenerator(ABC):
     def __init__(self, sample_duration, sample_rate):
         self.logger = logging.getLogger(__name__)
+        self.logger.propagate = True
         self.sample_loader = SampleLoader(
             sample_duration=sample_duration, sample_rate=sample_rate
         )

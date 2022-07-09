@@ -2,6 +2,7 @@ import librosa
 import logging
 import numpy as np
 
+from pathlib import Path
 from typing import Optional
 
 
@@ -16,8 +17,12 @@ class Audio:
     ):
 
         self.logger = logging.getLogger(__name__)
+        self.logger.propagate = True
 
         self.sample_rate = sample_rate
+
+        if isinstance(path, Path):
+            path = str(path)
 
         if audio is not None:
             if path is not None:

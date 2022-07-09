@@ -5,16 +5,22 @@ import os
 import pandas as pd
 import warnings
 
+from pathlib import Path
 from typing import Dict, Tuple, Union
 
 
 class SampleLoader:
     def __init__(self, sample_duration: int, sample_rate: int):
         self.logger = logging.getLogger(__name__)
+        self.logger.propagate = True
         self.sample_duration = sample_duration
         self.sample_rate = sample_rate
 
     def _load_audio(self, audio_path: str, start_time: int) -> np.ndarray:
+
+        if isinstance(audio_path, Path):
+            audio_path = str(audio_path)
+
         self.logger.info(
             f"Loading audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
         )
@@ -29,7 +35,7 @@ class SampleLoader:
                 f"Successfully loaded audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
             )
             return audio
-        except ValueError as e:
+        except (ValueError, FileNotFoundError) as e:
             self.logger.info(
                 f"Could not load audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
             )
@@ -77,7 +83,7 @@ class SampleLoader:
             )
             return True, audio_dict
 
-        except ValueError:
+        except (ValueError, FileNotFoundError):
             self.logger.warning(
                 f'Sample with whosampled_id {sample["whosampled_id"]} failed verification and will not be used. Reason: Could not load sample instance.'
             )
