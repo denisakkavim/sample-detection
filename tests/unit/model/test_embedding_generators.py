@@ -10,6 +10,7 @@ from sample_detection.model.embedding_generators import (
     Wav2ClipEmbeddingGenerator,
 )
 
+logging.root.setLevel(logging.INFO)
 test_files_dir = Path(__file__).resolve().parent.parent.parent
 
 

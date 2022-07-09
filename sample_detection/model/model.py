@@ -25,6 +25,7 @@ class Model:
     ):
 
         self.logger = logging.getLogger(__name__)
+        self.logger.propagate = True
         self.random_state = random_state
         self.sample_duration = sample_duration
 
@@ -172,11 +173,11 @@ class Model:
         negative_samples: pd.DataFrame,
     ) -> Tuple[np.ndarray, np.ndarray]:
 
-        positive_samples = self.__process_positive_samples(
+        positive_samples = self._process_positive_samples(
             embeddings=embeddings, sample_info=sample_info
         )
 
-        negative_samples = self.__process_negative_samples(
+        negative_samples = self._process_negative_samples(
             embeddings=embeddings, negative_samples=negative_samples
         )
 
