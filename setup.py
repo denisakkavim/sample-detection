@@ -9,7 +9,7 @@ setup(
     license="MIT",
     entry_points={
         "console_scripts": [
-            "sample-detection=sample_detection.cli.cli:cli",
+            "sample-detection=sample_detection.cli:cli",
         ]
     },
 )
