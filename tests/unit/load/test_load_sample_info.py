@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from sample_detection.load.scraper import load_sample_info
+from sample_detection.load import load_sample_info
 
 
 def test_load_sample_info():

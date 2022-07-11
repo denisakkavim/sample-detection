@@ -2,7 +2,7 @@ from pathlib import Path
 
 from sample_detection.model.audio import Audio
 from sample_detection.model.model import Model
-from sample_detection.detect.sample_detector import SampleDetector
+from sample_detection.detect import SampleDetector
 
 test_files_dir = Path(__file__).resolve().parent.parent.parent / "test_files"
 audio_dir = test_files_dir / "audio"
