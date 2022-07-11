@@ -20,18 +20,9 @@ def test_init(caplog, clip_length, sample_rate):
     assert "Setting random seed" in caplog.text
 
 
-def test_fit(clip_length, sample_rate, min_negatives):
+def test_fit(sample_info, clip_length, sample_rate, min_negatives):
 
     model = Model(sample_duration=clip_length, sample_rate=sample_rate)
-
-    sample_info_path = test_files_dir / "sample-details" / "sample_details.csv"
-
-    sample_info = pd.read_csv(sample_info_path)
-    sample_info["sample_in_times"] = sample_info["sample_in_times"].apply(literal_eval)
-    sample_info["sample_from_times"] = sample_info["sample_from_times"].apply(
-        literal_eval
-    )
-
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
     try:
@@ -42,17 +33,9 @@ def test_fit(clip_length, sample_rate, min_negatives):
     assert True
 
 
-def test_predict_both_audio(clip_length, sample_rate, min_negatives):
+def test_predict_both_audio(sample_info, clip_length, sample_rate, min_negatives):
 
     model = Model(sample_duration=clip_length, sample_rate=sample_rate)
-
-    sample_info_path = test_files_dir / "sample-details" / "sample_details.csv"
-
-    sample_info = pd.read_csv(sample_info_path)
-    sample_info["sample_in_times"] = sample_info["sample_in_times"].apply(literal_eval)
-    sample_info["sample_from_times"] = sample_info["sample_from_times"].apply(
-        literal_eval
-    )
 
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
@@ -67,18 +50,9 @@ def test_predict_both_audio(clip_length, sample_rate, min_negatives):
     assert (pred >= 0) and (pred <= 1)
 
 
-def test_predict_both_embeddings(clip_length, sample_rate, min_negatives):
+def test_predict_both_embeddings(sample_info, clip_length, sample_rate, min_negatives):
 
     model = Model(sample_duration=clip_length, sample_rate=sample_rate)
-
-    sample_info_path = test_files_dir / "sample-details" / "sample_details.csv"
-
-    sample_info = pd.read_csv(sample_info_path)
-    sample_info["sample_in_times"] = sample_info["sample_in_times"].apply(literal_eval)
-    sample_info["sample_from_times"] = sample_info["sample_from_times"].apply(
-        literal_eval
-    )
-
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
     emb_1 = np.array([0 for i in range(512)])
@@ -89,18 +63,9 @@ def test_predict_both_embeddings(clip_length, sample_rate, min_negatives):
     assert (pred >= 0) and (pred <= 1)
 
 
-def test_predict_both_embeddings(clip_length, sample_rate, min_negatives):
+def test_predict_both_embeddings(sample_info, clip_length, sample_rate, min_negatives):
 
     model = Model(sample_duration=clip_length, sample_rate=sample_rate)
-
-    sample_info_path = test_files_dir / "sample-details" / "sample_details.csv"
-
-    sample_info = pd.read_csv(sample_info_path)
-    sample_info["sample_in_times"] = sample_info["sample_in_times"].apply(literal_eval)
-    sample_info["sample_from_times"] = sample_info["sample_from_times"].apply(
-        literal_eval
-    )
-
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
     audio_path = audio_dir / "fan_noise.mp3"
@@ -113,19 +78,10 @@ def test_predict_both_embeddings(clip_length, sample_rate, min_negatives):
 
 
 def test_predict_both_embeddings_logging(
-    caplog, clip_length, sample_rate, min_negatives
+    caplog, sample_info, clip_length, sample_rate, min_negatives
 ):
 
     model = Model(sample_duration=clip_length, sample_rate=sample_rate)
-
-    sample_info_path = test_files_dir / "sample-details" / "sample_details.csv"
-
-    sample_info = pd.read_csv(sample_info_path)
-    sample_info["sample_in_times"] = sample_info["sample_in_times"].apply(literal_eval)
-    sample_info["sample_from_times"] = sample_info["sample_from_times"].apply(
-        literal_eval
-    )
-
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
     audio_path = audio_dir / "fan_noise.mp3"
