@@ -2,7 +2,7 @@ import click
 import os
 import pickle
 
-from sample_detection.load.scraper import load_sample_info
+from sample_detection.load import load_sample_info
 from sample_detection.model.model import Model
 from sample_detection.scraper.scraper import SampleScraper
 
