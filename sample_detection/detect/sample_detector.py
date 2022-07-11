@@ -33,20 +33,20 @@ class SampleDetector:
 
         potential_samples = [
             {
-                "time_song_1": (
-                    start_song_1,
-                    start_song_1 + self.sample_duration,
+                "time_1": (
+                    start_1,
+                    start_1 + self.sample_duration,
                 ),
-                "time_song_2": (
-                    start_song_2,
-                    start_song_2 + self.sample_duration,
+                "time_2": (
+                    start_2,
+                    start_2 + self.sample_duration,
                 ),
                 "confidence": self.model.predict(
                     embedding_1=embedding_1, embedding_2=embedding_2
                 ),
             }
-            for start_song_1, embedding_1 in audio_1_embeddings.items()
-            for start_song_2, embedding_2 in audio_2_embeddings.items()
+            for start_1, embedding_1 in audio_1_embeddings.items()
+            for start_2, embedding_2 in audio_2_embeddings.items()
         ]
 
         return [
