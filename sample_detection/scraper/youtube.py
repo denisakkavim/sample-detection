@@ -30,7 +30,6 @@ class YoutubeScraper(BaseScraper):
         :type file_name: str, optional
 
         :return: Whether the download was successful
-        :rtype: bool
         """
 
         if file_name is None:
@@ -63,11 +62,10 @@ class YoutubeScraper(BaseScraper):
 
         :param youtube_ids: IDs of YouTube videos to download the audio from
         :type youtube_ids: Iterable
-        :param save_dir: Path to the folder in which the downloaded videos should be saved
+        :param save_dir: Path to the folder in which the downloaded audio should be saved
         :type save_dir: str
 
         :return: True
-        :rtype: bool
         """
 
         # Check if any songs have already been downloaded, and if yes, exclude them from the set of songs to download:

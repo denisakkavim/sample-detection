@@ -52,8 +52,8 @@ class Model:
         self, sample_info: pd.DataFrame, min_negatives: Optional[int] = 1
     ) -> pd.DataFrame:
 
-        """Given a dataframe of samples, generate sets of negative pairs (i.e: pairs of songs
-        that do not contain a sample).
+        """Given a dataframe of samples, use negative sampling to generate sets
+        of negative pairs (i.e: pairs of songs that do not contain a sample).
 
         :param sample_df: Dataframe with sample info
         :type sample_df: pd.DataFrame
@@ -181,6 +181,7 @@ class Model:
             embeddings=embeddings, negative_samples=negative_samples
         )
 
+        # join positive and negative samples together, and separate features from labels
         features, labels = zip(*(positive_samples + negative_samples))
 
         return np.vstack(features), np.array(labels)
@@ -188,6 +189,17 @@ class Model:
     def fit(
         self, sample_info: pd.DataFrame, audio_dir: str, min_negatives: int
     ) -> None:
+
+        """Fit the sample detection model.
+
+        :param sample_info: Sample info (as scraped from scraper), with sample times as lists
+        :type sample_info: pd.DataFrame
+        :param audio_dir: Directory containing the audio files scraped by the scraper.
+        :type audio_dir: str
+        :param min_negatives: Number of negative samples to generate per positive sample
+        :type min_negatives: pd.DataFrame
+
+        """
 
         (
             sample_info,
@@ -215,6 +227,13 @@ class Model:
         embedding_1: Optional[np.ndarray] = None,
         embedding_2: Optional[np.ndarray] = None,
     ):
+
+        """Predict whether an audioclip contains a sample of another. All inputs are assumed to be audioclips (
+        or embeddings of audioclips) of length sample_duration (specified in constructor, and can be found
+        under the sample_duration attribute).
+
+        :return: Score indicating likelihood that one audioclip contains a sample of another
+        """
 
         POSITIVE_CLASS_INDEX = 1
         RESULT_INDEX = 0

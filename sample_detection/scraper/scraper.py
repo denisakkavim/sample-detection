@@ -39,7 +39,7 @@ class SampleScraper(BaseScraper):
         self.youtube_scraper = YoutubeScraper(save_dir=self.save_dirs["audio"])
         self.AUDIO_LENGTH_REMOVAL_THRESHOLD = audio_length_removal_threshold
 
-    def clean(self, sample_df: pd.DataFrame) -> pd.DataFrame:
+    def _clean(self, sample_df: pd.DataFrame) -> pd.DataFrame:
 
         self.logger.info(
             f"Identifying un-needed audio files (samples for which both songs could not be downloaded from YouTube or are over {self.AUDIO_LENGTH_REMOVAL_THRESHOLD} seconds long)"
@@ -88,7 +88,18 @@ class SampleScraper(BaseScraper):
 
         return sample_df
 
-    def scrape(self, start_year, end_year, pages_per_year):
+    def scrape(self, start_year: int, end_year: int, pages_per_year: int) -> None:
+
+        """Scrape WhoSampled for samples, and download the songs from YouTube.
+
+        :param start_year: First year to get samples from
+        :type start_year: int
+        :param end_year: Last year to get samples from
+        :type end_year: int
+        :param pages_per_year: Number of pages of search results to go through for each year
+        :type pages_per_year: int
+
+        """
 
         self.logger.info("Starting WhoSampled scrape")
         sample_df = self.whosampled_scraper.scrape(start_year, end_year, pages_per_year)
@@ -102,7 +113,7 @@ class SampleScraper(BaseScraper):
         self.logger.info("YouTube download completed")
 
         self.logger.info("Saving sample details to disk")
-        cleaned_df = self.clean(sample_df=sample_df)
+        cleaned_df = self._clean(sample_df=sample_df)
         cleaned_df.to_csv(
             os.path.join(self.save_dirs["sample_details"], "sample_details.csv"),
             index=False,

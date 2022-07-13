@@ -27,7 +27,7 @@ def test_sample_detector(sample_info, clip_length, sample_rate, min_negatives):
     assert all(
         [
             (key in sample)
-            for key in ["time_1", "time_2", "confidence"]
+            for key in ["start_time_1", "start_time_2", "confidence"]
             for sample in found_samples
         ]
     )

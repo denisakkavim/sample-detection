@@ -45,10 +45,29 @@ class Audio:
     def __len__(self):
         return self.length
 
-    def get_numpy(self):
+    def get_numpy(self) -> np.ndarray:
+
+        """Get the numpy representation of the audio clip.
+
+        :return: Numpy representation of the audio clip
+        :rtype: np.ndarray
+
+        """
         return self.np_array
 
-    def get_extract(self, start_time, extract_length):
+    def get_extract(self, start_time: int, extract_length: int) -> "Audio":
+
+        """Get an extract of the current audio clip.
+
+        :param start_time: Start time (in seconds) of the extract you want to get
+        :type start_time: int
+        :param extract_length: Length (in seconds) of the extract you want to get
+        :type extract_length: int
+
+        :return: Extract of the current audio clip
+
+        """
+
         if self.sample_rate * (start_time + extract_length) < len(self.np_array):
             return Audio(
                 audio=self.np_array[

@@ -14,6 +14,15 @@ from sample_detection.scraper.base import BaseScraper
 class WhosampledScraper(BaseScraper):
     def __init__(self, attempts_per_page: int = 10, wait_between_attempts: int = 30):
 
+        """Create a WhoSampled Scraper.
+
+        :param attempts_per_page: Number of attempts that should be made to load a given page
+        :type attempts_per_page: int
+        :param wait_between_attempts: Number of seconds to wait before re-attempting to load a page
+        :type wait_between_attempts: Model
+
+        """
+
         super().__init__()
 
         self.logger = logging.getLogger(__name__)
@@ -25,13 +34,13 @@ class WhosampledScraper(BaseScraper):
 
         """Get the URLs of all samples on the a given WhoSampled page.
 
-        :param page: HTML contents of a page on WhoSampled, as returned by :function:`sample_detection.scraper.web.get_page`.
+        :param page: HTML contents of a page on WhoSampled, as returned by sample_detection.scraper.web.get_page.
         :type page: bs4.BeautifulSoup
 
         :return: List of strings. Each string is the URL of a sample on WhoSampled, relative to whosampled.com (e.g: if the full URL would be
         https://www.whosampled.com/sample/729975/Dua-Lipa-Love-Again-Lew-Stone-%26-the-Monseigneur-Band-Al-Bowlly-My-Woman/, the string in the list
         would be /sample/729975/Dua-Lipa-Love-Again-Lew-Stone-%26-the-Monseigneur-Band-Al-Bowlly-My-Woman/).
-        :rtype: list
+
         """
 
         songs_on_page = page.find(
@@ -65,11 +74,10 @@ class WhosampledScraper(BaseScraper):
         """Get the details of a sample: the WhoSampled sample ID (scraped from the URL), links to (on WhoSampled) the songs in the sample, YouTube
         IDs for the songs on YouTube (assuming they exist), and the type of sample.
 
-        :param sample_url: URL for a sample, relative to whosampled.com (as returned by :function: `sample_detection.scraper.whosampled.get_samples_on_page`)
+        :param sample_url: URL for a sample, relative to whosampled.com (as returned by sample_detection.scraper.whosampled.get_samples_on_page)
         :type sample_url: str
 
         :return: Dict containing details of the sample at the given URL
-        :rtype: dict
         """
 
         try:
@@ -152,15 +160,15 @@ class WhosampledScraper(BaseScraper):
         """Scrape WhoSample for samples in between (and including) the start and end year. Goes through pages_per_year
         pages of search results for each year.
 
-        :param year_start: First year to get samples from
-        :type year_start: int
-        :param year_end: Last year to get samples from
-        :type year_end: int
+        :param start_year: First year to get samples from
+        :type start_year: int
+        :param end_year: Last year to get samples from
+        :type end_year: int
         :param pages_per_year: Number of pages of search results to go through for each year
         :type pages_per_year: int
 
-        :return: Dataframe containing sample details as gotten from :function:`sample_detection.scraper.whosampled.get_sample_details`
-        :rtype: pd.DataFrame
+        :return: Dataframe containing sample details as gotten from sample_detection.scraper.whosampled.get_sample_details
+
         """
         # Get tuples of (year, page) to scrape over (this makes the for loop below much more elegant):
         pages_to_scrape = list(
