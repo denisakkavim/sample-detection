@@ -18,12 +18,31 @@ class EmbeddingGenerator(ABC):
         )
 
     @abstractmethod
-    def generate_embedding(self):
-        pass
+    def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
+
+        """Generate an embedding from an audio clip (represented as a 1D ndarray).
+
+        :param audio_array: 1D np.ndarray representation of an audio clip
+        :type audio_array: np.ndarray
+
+        :return: Embedding
+        """
+        return NotImplementedError()
 
     def generate_embeddings_from_directory(
         self, sample_info: pd.DataFrame, audio_dir: str
     ) -> Tuple[pd.DataFrame, Dict[str, Dict[int, np.ndarray]]]:
+
+        """Generate an embedding from an audio clip (represented as a 1D ndarray).
+
+        :param sample_info: Sample info (as scraped from scraper), with sample times as lists
+        :type sample_info: pd.DataFrame
+        :param audio_dir: Directory containing the audio files scraped by the scraper.
+        :type audio_dir: str
+
+        :return: Dataframe of samples for which embeddings were succesfully generated, and a nested dictionary of
+        embeddings, with filenames and sample start times as keys, and embeddings as values.
+        """
 
         self.logger.info(f"Generating embeddings for audio in {audio_dir}")
 
@@ -70,9 +89,14 @@ class Wav2ClipEmbeddingGenerator(EmbeddingGenerator):
         self.logger = logging.getLogger(__name__)
         self.model = wav2clip.get_model()
 
-    def generate_embedding(self, audio: np.ndarray) -> np.ndarray:
+    def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
 
-        embedding = wav2clip.embed_audio(audio, self.model)
+        """Generate a wav2clip embedding from an audio clip (represented as a 1D ndarray).
+
+        :return: Embedding
+        """
+
+        embedding = wav2clip.embed_audio(audio_array, self.model)
         embedding = np.squeeze(embedding)
 
         return embedding

@@ -18,6 +18,18 @@ class SampleLoader:
 
     def _load_audio(self, audio_path: str, start_time: int) -> np.ndarray:
 
+        """Load an audioclip.
+
+        :param audio_path: Path to file containing the audio for the sample to be loaded.
+        :type audio_path: str
+        :param start_time: Start time (in seconds) of the sample
+        :type start_time: int
+
+        :raises e: ValueError, FileNotFoundError
+        :return: np.ndarray representation of the audio in audioclip
+
+        """
+
         if isinstance(audio_path, Path):
             audio_path = str(audio_path)
 
@@ -45,13 +57,22 @@ class SampleLoader:
         self, audio_dir: str, sample: pd.Series
     ) -> Tuple[bool, Dict[str, Union[None, Dict[int, np.ndarray]]]]:
 
-        self.logger.info(
-            f'Verifying sample with whosampled_id {sample["whosampled_id"]}'
-        )
+        """Load audio for both songs in a sample.
+
+        :param sample: Row from sample info dataframe (as scraped by scraper), with sample times as lists
+        :type sample: pd.Series
+        :param audio_dir: Directory containing the audio files scraped by the scraper.
+        :type audio_dir: str
+
+        :return: Whether the sample was loaded successfully, and a nested dictionary of
+        embeddings, with filenames and sample start times as keys, and audio arrays as values.
+        """
+
+        self.logger.info(f'Loading sample with whosampled_id {sample["whosampled_id"]}')
 
         if len(sample["sample_in_times"]) != len(sample["sample_from_times"]):
             self.logger.warning(
-                f'Sample with whosampled id {sample["whosampled_id"]} failed verification and will not be used. Reason: Could not find a one-to-one match between sample instances. '
+                f'Sample with whosampled id {sample["whosampled_id"]} could not be loaded and will not be used. Reason: Could not find a one-to-one match between sample instances. '
             )
             return False, None
 
@@ -85,6 +106,6 @@ class SampleLoader:
 
         except (ValueError, FileNotFoundError):
             self.logger.warning(
-                f'Sample with whosampled_id {sample["whosampled_id"]} failed verification and will not be used. Reason: Could not load sample instance.'
+                f'Sample with whosampled_id {sample["whosampled_id"]} could not be loaded and will not be used. Reason: Could not load sample instance.'
             )
             return False, None
