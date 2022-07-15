@@ -3,7 +3,7 @@ import os
 import pickle
 
 from sample_detection.load import load_sample_info
-from sample_detection.model.model import Model
+from sample_detection.detect.sample_detector import SampleDetector
 from sample_detection.scraper.scraper import SampleScraper
 
 
@@ -57,7 +57,7 @@ def train(info_path, audio_dir, save_dir, sample_duration, sample_rate):
 
     train_df = load_sample_info(info_path)
 
-    model = Model(sample_duration=sample_duration, sample_rate=sample_rate)
+    model = SampleDetector(sample_duration=sample_duration, sample_rate=sample_rate)
     model.fit(sample_info=train_df, audio_dir=audio_dir, min_negatives=2)
 
     if not os.path.exists(save_dir):
