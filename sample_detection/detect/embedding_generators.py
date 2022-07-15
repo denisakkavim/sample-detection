@@ -4,18 +4,25 @@ import numpy as np
 import pandas as pd
 import logging
 
-from typing import Tuple, Dict
+from typing import Optional, Tuple, Dict
 
 from sample_detection.detect.sample_loader import SampleLoader
 
 
 class EmbeddingGenerator(ABC):
-    def __init__(self, sample_duration, sample_rate):
+    def __init__(
+        self,
+        sample_duration: int = 15,
+        sample_rate: int = 16000,
+        sample_loader: Optional[SampleLoader] = None,
+    ):
         self.logger = logging.getLogger(__name__)
         self.logger.propagate = True
-        self.sample_loader = SampleLoader(
-            sample_duration=sample_duration, sample_rate=sample_rate
-        )
+
+        if sample_loader is None:
+            self.sample_loader = SampleLoader(
+                sample_duration=sample_duration, sample_rate=sample_rate
+            )
 
     @abstractmethod
     def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
