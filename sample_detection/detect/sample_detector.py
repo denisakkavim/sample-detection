@@ -49,6 +49,8 @@ class SampleDetector:
                 self.embedding_generator = Wav2ClipEmbeddingGenerator(
                     sample_duration=sample_duration, sample_rate=sample_rate
                 )
+        else:
+            self.embedding_generator = embedding_generator
 
         self.embedding_comparer = MLPClassifier(
             learning_rate=learning_rate,
