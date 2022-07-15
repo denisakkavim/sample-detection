@@ -18,8 +18,8 @@ class SampleDetector:
     def __init__(
         self,
         sample_duration: int,
-        sample_rate: int,
-        embedding_generator: EmbeddingGenerator = Wav2ClipEmbeddingGenerator(),
+        sample_rate: Optional[int] = None,
+        embedding_generator: Optional[EmbeddingGenerator] = None,
         learning_rate: str = "constant",
         learning_rate_init: float = 1e-3,
         hidden_layer_sizes: Optional[Tuple[int, int]] = (256, 64),
@@ -40,7 +40,16 @@ class SampleDetector:
         torch.manual_seed(random_state)
         random.seed(random_state)
 
-        self.embedding_generator = embedding_generator
+        if embedding_generator is None:
+            if sample_rate is None:
+                self.embedding_generator = Wav2ClipEmbeddingGenerator(
+                    sample_duration=sample_duration, sample_rate=16000
+                )
+            else:
+                self.embedding_generator = Wav2ClipEmbeddingGenerator(
+                    sample_duration=sample_duration, sample_rate=sample_rate
+                )
+
         self.embedding_comparer = MLPClassifier(
             learning_rate=learning_rate,
             learning_rate_init=learning_rate_init,
