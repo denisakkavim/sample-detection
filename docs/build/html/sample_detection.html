@@ -42,7 +42,6 @@
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-sample_detection.cli">sample_detection.cli module</a></li>
-<li><a class="reference internal" href="#module-sample_detection.detect">sample_detection.detect module</a></li>
 <li><a class="reference internal" href="#module-sample_detection.load">sample_detection.load module</a></li>
 <li><a class="reference internal" href="#module-sample_detection">Module contents</a></li>
 </ul>
@@ -79,13 +78,13 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sample_detection.model.html">sample_detection.model package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sample_detection.model.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample_detection.model.html#module-sample_detection.model.audio">sample_detection.model.audio module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample_detection.model.html#module-sample_detection.model.embedding_generators">sample_detection.model.embedding_generators module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample_detection.model.html#module-sample_detection.model.model">sample_detection.model.model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample_detection.model.html#module-sample_detection.model.sample_loader">sample_detection.model.sample_loader module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample_detection.model.html#module-sample_detection.model">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_detection.detect.html">sample_detection.detect package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.html#module-sample_detection.detect.audio">sample_detection.detect.audio module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.html#module-sample_detection.detect.embedding_generators">sample_detection.detect.embedding_generators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.html#module-sample_detection.detect.sample_detector">sample_detection.detect.sample_detector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.html#module-sample_detection.detect.sample_loader">sample_detection.detect.sample_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.html#module-sample_detection.detect">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sample_detection.scraper.html">sample_detection.scraper package</a><ul>
@@ -105,35 +104,6 @@
 </section>
 <section id="module-sample_detection.cli">
 <span id="sample-detection-cli-module"></span><h2>sample_detection.cli module<a class="headerlink" href="#module-sample_detection.cli" title="Permalink to this heading"></a></h2>
-</section>
-<section id="module-sample_detection.detect">
-<span id="sample-detection-detect-module"></span><h2>sample_detection.detect module<a class="headerlink" href="#module-sample_detection.detect" title="Permalink to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sample_detection.detect.SampleDetector">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.detect.</span></span><span class="sig-name descname"><span class="pre">SampleDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hop_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="sample_detection.model.html#sample_detection.model.model.Model" title="sample_detection.model.model.Model"><span class="pre">Model</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.detect.SampleDetector" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sample_detection.detect.SampleDetector.find_samples">
-<span class="sig-name descname"><span class="pre">find_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="sample_detection.model.html#sample_detection.model.audio.Audio" title="sample_detection.model.audio.Audio"><span class="pre">Audio</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="sample_detection.model.html#sample_detection.model.audio.Audio" title="sample_detection.model.audio.Audio"><span class="pre">Audio</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sample_detection.detect.SampleDetector.find_samples" title="Permalink to this definition"></a></dt>
-<dd><p>Given two songs, find instances where one song contains a sample of the other.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>audio_1</strong> (<a class="reference internal" href="sample_detection.model.html#sample_detection.model.audio.Audio" title="sample_detection.model.audio.Audio"><em>Audio</em></a>) – Song 1</p></li>
-<li><p><strong>audio_1</strong> – Song 2</p></li>
-<li><p><strong>threshold</strong> – Threshold above which to return samples.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>List of dictionaries. Each dictionary contains the start time of the sample</p>
-</dd>
-</dl>
-<p>in each song, the length of the sample, and the confidence score generated by the
-model for the sample.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="module-sample_detection.load">
 <span id="sample-detection-load-module"></span><h2>sample_detection.load module<a class="headerlink" href="#module-sample_detection.load" title="Permalink to this heading"></a></h2>

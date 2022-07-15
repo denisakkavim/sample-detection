@@ -7,7 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   sample_detection.model
+   sample_detection.detect
    sample_detection.scraper
 
 Submodules
@@ -17,14 +17,6 @@ sample\_detection.cli module
 ----------------------------
 
 .. automodule:: sample_detection.cli
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-sample\_detection.detect module
--------------------------------
-
-.. automodule:: sample_detection.detect
    :members:
    :undoc-members:
    :show-inheritance:
