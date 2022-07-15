@@ -7,7 +7,10 @@ import torch
 from sklearn.neural_network import MLPClassifier
 from typing import Dict, List, Optional, Set, Tuple
 
-from sample_detection.detect.embedding_generators import Wav2ClipEmbeddingGenerator
+from sample_detection.detect.embedding_generators import (
+    EmbeddingGenerator,
+    Wav2ClipEmbeddingGenerator,
+)
 from sample_detection.detect.audio import Audio
 
 
@@ -16,6 +19,7 @@ class SampleDetector:
         self,
         sample_duration: int,
         sample_rate: int,
+        embedding_generator: EmbeddingGenerator = Wav2ClipEmbeddingGenerator(),
         learning_rate: str = "constant",
         learning_rate_init: float = 1e-3,
         hidden_layer_sizes: Optional[Tuple[int, int]] = (256, 64),
@@ -36,9 +40,7 @@ class SampleDetector:
         torch.manual_seed(random_state)
         random.seed(random_state)
 
-        self.embedding_generator = Wav2ClipEmbeddingGenerator(
-            sample_duration=sample_duration, sample_rate=sample_rate
-        )
+        self.embedding_generator = embedding_generator
         self.embedding_comparer = MLPClassifier(
             learning_rate=learning_rate,
             learning_rate_init=learning_rate_init,
