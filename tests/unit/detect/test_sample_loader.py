@@ -1,11 +1,10 @@
 import logging
 import pandas as pd
-import pytest
 
 from ast import literal_eval
 from pathlib import Path
 
-from sample_detection.model.sample_loader import SampleLoader
+from sample_detection.detect.sample_loader import SampleLoader
 
 test_files_dir = Path(__file__).resolve().parent.parent.parent / "test_files"
 audio_dir = test_files_dir / "audio"
@@ -91,8 +90,8 @@ def test_load_sample_logging(caplog, clip_length, sample_rate):
             audio_dir=audio_dir, sample=sample
         )
 
-    assert ("Verifying sample with whosampled_id" in caplog.text) and (
-        "passed verification" in caplog.text
+    assert ("Loading sample with whosampled_id" in caplog.text) and (
+        "successfully loaded" in caplog.text
     )
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 from pathlib import Path
 
-from sample_detection.model.audio import Audio
+from sample_detection.detect.audio import Audio
 
 test_files_dir = Path(__file__).resolve().parent.parent.parent / "test_files"
 

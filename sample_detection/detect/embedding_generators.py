@@ -6,7 +6,7 @@ import logging
 
 from typing import Tuple, Dict
 
-from sample_detection.model.sample_loader import SampleLoader
+from sample_detection.detect.sample_loader import SampleLoader
 
 
 class EmbeddingGenerator(ABC):

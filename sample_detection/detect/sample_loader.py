@@ -100,12 +100,12 @@ class SampleLoader:
                 }
 
             self.logger.info(
-                f'Sample with whosampled_id {sample["whosampled_id"]} passed verification'
+                f'Sample with whosampled_id {sample["whosampled_id"]} successfully loaded '
             )
             return True, audio_dict
 
         except (ValueError, FileNotFoundError):
             self.logger.warning(
-                f'Sample with whosampled_id {sample["whosampled_id"]} could not be loaded and will not be used. Reason: Could not load sample instance.'
+                f'Sample with whosampled_id {sample["whosampled_id"]} could not be loaded and will not be used. Reason: Could not load sample instance. '
             )
             return False, None

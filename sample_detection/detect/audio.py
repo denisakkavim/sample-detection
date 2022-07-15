@@ -29,6 +29,10 @@ class Audio:
                 self.logger.warning(
                     "Both audio (ndarray) and path to file are passed as arguments: will use ndarray representation of audio instead of file at path"
                 )
+            if audio.ndim != 1:
+                raise ValueError(
+                    "1D array expected as input - flatten audio array to one dimension and try again"
+                )
             self.np_array = audio
         elif path is not None:
             self.np_array, _ = librosa.load(
