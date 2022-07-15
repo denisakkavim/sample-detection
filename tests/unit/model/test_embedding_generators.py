@@ -5,7 +5,7 @@ import pandas as pd
 from ast import literal_eval
 from pathlib import Path
 
-from sample_detection.model.embedding_generators import (
+from sample_detection.detect.embedding_generators import (
     EmbeddingGenerator,
     Wav2ClipEmbeddingGenerator,
 )
@@ -125,6 +125,6 @@ def test_wav2clip_generate_embedding(clip_length, sample_rate, audio):
         sample_duration=clip_length, sample_rate=sample_rate
     )
 
-    embedding = embedding_generator.generate_embedding(audio=audio)
+    embedding = embedding_generator.generate_embedding(audio)
 
     assert embedding.shape == (512,)
