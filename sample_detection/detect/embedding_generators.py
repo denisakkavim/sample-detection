@@ -74,8 +74,8 @@ class EmbeddingGenerator(ABC):
 
                 for ytid in sample_audio:
                     sample_embeddings[ytid] = {
-                        time: self.generate_embedding(audio)
-                        for time, audio in sample_audio[ytid].items()
+                        time: self.generate_embedding(audio_array)
+                        for time, audio_array in sample_audio[ytid].items()
                     }
 
                 for ytid in sample_embeddings:
