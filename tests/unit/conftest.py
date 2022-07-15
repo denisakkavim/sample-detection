@@ -29,7 +29,7 @@ def min_negatives():
 def sample_info():
 
     sample_info_path = (
-        Path(__file__).resolve().parent
+        Path(__file__).resolve().parent.parent
         / "test_files"
         / "sample-details"
         / "sample_details.csv"

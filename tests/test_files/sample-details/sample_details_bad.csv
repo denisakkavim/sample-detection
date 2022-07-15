@@ -1,0 +1,3 @@
+whosampled_id,sample_in,sample_from,sample_in_times,sample_from_times,sample_in_ytid,sample_from_ytid,sample_type
+1,/Artist-1/Ocean,/Artist-3/Rain,[4],[16],ocean_noise,bad_id,Direct Sample of Hook / Riff
+2,/Artist-2/Fan,/Artist-4/White,"[10, 23]",[0],fan_noise,white_noise,Direct Sample of Multiple Elements

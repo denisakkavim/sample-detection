@@ -13,7 +13,8 @@ audio_dir = test_files_dir / "audio"
 
 def test_init(caplog, clip_length, sample_rate):
 
-    model = SampleDetector(sample_duration=clip_length, sample_rate=sample_rate)
+    with caplog.at_level(logging.INFO):
+        model = SampleDetector(sample_duration=clip_length, sample_rate=sample_rate)
     assert "Setting random seed" in caplog.text
 
 
@@ -103,10 +104,7 @@ def test_sample_detection(sample_info, clip_length, sample_rate, min_negatives):
     audio_1 = Audio(path=audio_1_path, clip_length=clip_length, sample_rate=sample_rate)
     audio_2 = Audio(path=audio_2_path, clip_length=clip_length, sample_rate=sample_rate)
 
-    sample_detector = SampleDetector(model=model)
-    found_samples = sample_detector.find_samples(
-        audio_1=audio_1, audio_2=audio_2, threshold=0
-    )
+    found_samples = model.find_samples(audio_1=audio_1, audio_2=audio_2, threshold=0)
 
     assert all(
         [
