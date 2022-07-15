@@ -37,7 +37,7 @@ class SampleLoader:
             f"Loading audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
         )
         try:
-            audio, _ = librosa.load(
+            audio_array, _ = librosa.load(
                 path=audio_path,
                 sr=self.sample_rate,
                 offset=start_time,
@@ -46,7 +46,7 @@ class SampleLoader:
             self.logger.info(
                 f"Successfully loaded audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
             )
-            return audio
+            return audio_array
         except (ValueError, FileNotFoundError) as e:
             self.logger.info(
                 f"Could not load audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"

@@ -5,7 +5,7 @@ import subprocess
 from glob import glob
 from typing import Optional, Iterable
 
-from sample_detection.scraper.base import BaseScraper
+from sample_detection.scrape.base import BaseScraper
 
 
 class YoutubeScraper(BaseScraper):

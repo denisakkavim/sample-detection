@@ -5,9 +5,9 @@ import pandas as pd
 from ffmpeg import probe
 from glob import glob
 
-from sample_detection.scraper.base import BaseScraper
-from sample_detection.scraper.whosampled import WhosampledScraper
-from sample_detection.scraper.youtube import YoutubeScraper
+from sample_detection.scrape.base import BaseScraper
+from sample_detection.scrape.whosampled import WhosampledScraper
+from sample_detection.scrape.youtube import YoutubeScraper
 
 
 class SampleScraper(BaseScraper):
