@@ -8,7 +8,7 @@ from networkx.algorithms.components.connected import connected_components
 from random import sample
 from typing import Dict, List, Set
 
-from sample_detection.load import load_sample_info
+from sample_detection.scrape.load import load_sample_info
 
 
 def split_data(

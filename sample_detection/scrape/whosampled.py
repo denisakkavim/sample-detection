@@ -8,7 +8,7 @@ from typing import Dict, List
 from urllib.error import URLError
 from urllib.parse import urljoin
 
-from sample_detection.scraper.base import BaseScraper
+from sample_detection.scrape.base import BaseScraper
 
 
 class WhosampledScraper(BaseScraper):

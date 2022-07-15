@@ -2,9 +2,9 @@ import click
 import os
 import pickle
 
-from sample_detection.load import load_sample_info
+from sample_detection.scrape.load import load_sample_info
 from sample_detection.detect.sample_detector import SampleDetector
-from sample_detection.scraper.scraper import SampleScraper
+from sample_detection.scrape.scraper import SampleScraper
 
 
 @click.group()
