@@ -107,7 +107,9 @@ While Sample Detection uses Wav2CLIP embeddings, it is possible to use embedding
 
 ```
 from sample_detection.detect.sample_detector import SampleDetector
+from sample_detection.detect.embedding_generators import EmbeddingGenerator
 from sample_detection.scrape.load import load_sample_info
+
 
 class CustomEmbeddingGenerator(EmbeddingGenerator):
 
