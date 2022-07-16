@@ -27,7 +27,7 @@ Organization
     │   │   ├── embedding_generators.py   <- generate embeddings from audio
     │   │   ├── sample_detector.py        <- detect samples in two pieces of audio
     │   │   └── sample_loader.py          <- load samples from scraper
-    │   ├── scrape                       <- scraping data to detect samples
+    │   ├── scrape                        <- scraping data to detect samples
     │   │   ├── __init__.py               
     │   │   ├── base.py                   <- base scraper class, fetches pages
     │   │   ├── scraper.py                <- Files needed to run the tests
