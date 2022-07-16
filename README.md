@@ -1,7 +1,7 @@
 Sample Detection
 ==============================
 
-In music, sampling is the reuse of a portion (or sample) of a sound recording in another recording. Sample Detection is a Python library that allows users to detect whether one song contains a direct sample of another. 
+In music, sampling is the reuse of a portion (or sample) of a sound recording in another recording. Sample Detection is a Python library that leverages the power of pre-trained audio embedding models to allow users to detect whether one song contains a direct sample of another. 
 
 This library has two components: 
 - a scraper, to scrape WhoSampled for known samples and get the audio from YouTube
