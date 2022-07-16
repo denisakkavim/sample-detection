@@ -13,16 +13,23 @@ class EmbeddingGenerator(ABC):
     def __init__(
         self,
         sample_duration: int = 15,
-        sample_rate: int = 16000,
+        sample_rate: Optional[int] = None,
         sample_loader: Optional[SampleLoader] = None,
     ):
         self.logger = logging.getLogger(__name__)
         self.logger.propagate = True
 
         if sample_loader is None:
-            self.sample_loader = SampleLoader(
-                sample_duration=sample_duration, sample_rate=sample_rate
-            )
+            if sample_rate is None:
+                self.sample_loader = SampleLoader(
+                    sample_duration=sample_duration, sample_rate=16000
+                )
+            else:
+                self.sample_loader = SampleLoader(
+                    sample_duration=sample_duration, sample_rate=sample_rate
+                )
+        else:
+            self.sample_loader = sample_loader
 
     @abstractmethod
     def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
