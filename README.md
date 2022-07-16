@@ -65,6 +65,7 @@ Using the python package
 ------------
 
 - Using the scraper
+
 Scraping samples is easy, and can be done as below. If you don't want to scrape WhoSampled and YouTube at the same time, or only want to scrape one of these, there are scrapers to handle these as well - more information can be found in the docs.
 
 ```
