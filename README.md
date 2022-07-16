@@ -30,10 +30,10 @@ Organization
     │   ├── scrape                        <- scraping data to detect samples
     │   │   ├── __init__.py               
     │   │   ├── base.py                   <- base scraper class, fetches pages
-    │   │   ├── scraper.py                <- Files needed to run the tests
+    │   │   ├── scraper.py                <- files needed to run the tests
     │   │   ├── whosampled.py             <- scrapes relevant info from whosamples
     │   │   └── youtube.py                <- downloads audio from youtube
-    │   ├── cli.py                        <- Scripts to download or generate data    
+    │   ├── cli.py                        <- scripts to download or generate data    
     │   └── load.py                       <- helps load in scraped data
     ├── .gitignore                        <- files git should ignore
     ├── LICENSE                           <- MIT license
