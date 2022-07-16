@@ -1,10 +1,12 @@
 Sample Detection
 ==============================
 
-- What is a sample
-- What this library does (wav2clip embeddings -> ffnn -> result)
-- Scraper and model builder
+In music, sampling is the reuse of a portion (or sample) of a sound recording in another recording. Sample Detection is a Python library that allows users to detect whether one song contains a direct sample of another. 
 
+This library has two components: 
+    - a scraper, to scrape WhoSampled for known samples and get the audio from YouTube
+    - a model builder, to build machine learning models to detect whether one song contains a sample of another
+    
 Organization
 ------------
 
@@ -25,7 +27,7 @@ Organization
     │   │   ├── embedding_generators.py   <- generate embeddings from audio
     │   │   ├── sample_detector.py        <- detect samples in two pieces of audio
     │   │   └── sample_loader.py          <- load samples from scraper
-    │   ├── scraper                       <- scraping data to detect samples
+    │   ├── scrape                       <- scraping data to detect samples
     │   │   ├── __init__.py               
     │   │   ├── base.py                   <- base scraper class, fetches pages
     │   │   ├── scraper.py                <- Files needed to run the tests
@@ -75,7 +77,6 @@ scraper = SampleScraper(save_dir=save_dir)
 scraper.scrape(
     start_year=start_year, end_year=end_year, pages_per_year=pages_per_year
 )
-
 ```
 
 - Building a sample detection model
@@ -98,7 +99,6 @@ audio_2 = Audio(path=audio_2_path)
 samples = model.find_samples(
     audio_1=audio_1, audio_2=audio_2, threshold=threshold, hop_length=hop_length
 )
-
 ```
 
 - Support for custom embeddings
@@ -127,5 +127,4 @@ model = SampleDetector(
 
 train_df = load_sample_info(scraped_info_path)
 model.fit(sample_info=train_df, audio_dir=scraped_audio_dir, min_negatives=min_negatives)
-
 ```
