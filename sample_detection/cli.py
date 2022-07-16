@@ -2,14 +2,50 @@ import click
 import os
 import pickle
 
-from sample_detection.scrape.load import load_sample_info
+from sample_detection.detect.audio import Audio
 from sample_detection.detect.sample_detector import SampleDetector
+from sample_detection.scrape.load import load_sample_info
 from sample_detection.scrape.scraper import SampleScraper
 
 
 @click.group()
 def cli():
     pass
+
+
+@cli.command()
+@click.option("--threshold", default=1 - 1e-5)
+@click.option("--hop-length", default=3)
+@click.argument("sample_detector_path", type=click.Path())
+@click.argument("audio_1_path", type=click.Path())
+@click.argument("audio_2_path", type=click.Path())
+def detect(sample_detector_path, audio_1_path, audio_2_path, threshold, hop_length):
+
+    """Run sample-detection detect <SAMPLE_DETECTOR_PATH> <AUDIO_1_PATH> <AUDIO_2_PATH> --hop-length <HOP_LENGTH> --threshold <THRESHOLD>
+    to detect whether audio_1 contains any samples of audio_2 (or vice versa).
+
+    <SAMPLE_DETECTOR_PATH> is the path to a pre-trained sample_detector (can be generated with
+    sample-detection train <INFO_PATH> <AUDIO_DIR> <SAVE_DIR> --sample-rate <SAMPLE_RATE> --sample-duration <SAMPLE_DURATION>).
+    <AUDIO_1_PATH> is the path to the first audio file.
+    <AUDIO_2_PATH> is the path to the second audio file
+
+    <HOP_LENGTH> is the amount of time (in seconds) between the start of each potential sample.
+    <THRESHOLD> is the value x such that if the score from the sample detector is greater than x, we show the sample to the user
+    """
+
+    with open(os.path.join(sample_detector_path, "model.pkl"), "rb") as f:
+        model = pickle.load(f)
+
+    audio_1 = Audio(path=audio_1_path)
+    audio_2 = Audio(path=audio_2_path)
+
+    samples = model.find_samples(
+        audio_1=audio_1, audio_2=audio_2, threshold=threshold, hop_length=hop_length
+    )
+
+    print(samples)
+
+    return None
 
 
 @cli.command()
@@ -38,12 +74,13 @@ def scrape(save_dir, start_year, end_year, pages_per_year):
 @cli.command()
 @click.option("--sample-rate", default=16000)
 @click.option("--sample-duration", default=15)
+@click.option("--min-negatives", default=1)
 @click.argument("info_path", type=click.Path())
 @click.argument("audio_dir", type=click.Path())
 @click.argument("save_dir", type=click.Path())
-def train(info_path, audio_dir, save_dir, sample_duration, sample_rate):
+def train(info_path, audio_dir, save_dir, sample_duration, sample_rate, min_negatives):
 
-    """Run sample-detection train <INFO_PATH> <AUDIO_DIR> <SAVE_DIR> --sample-rate <SAMPLE_RATE> --sample-duration <SAMPLE_DURATION>
+    """Run sample-detection train <INFO_PATH> <AUDIO_DIR> <SAVE_DIR> --sample-rate <SAMPLE_RATE> --sample-duration <SAMPLE_DURATION> --min-negatives <MIN_NEGATIVES>
     to train a model to detect samples.
 
     <INFO_PATH> is the path to sample information scraped from WhoSampled by the scraper.
@@ -58,7 +95,7 @@ def train(info_path, audio_dir, save_dir, sample_duration, sample_rate):
     train_df = load_sample_info(info_path)
 
     model = SampleDetector(sample_duration=sample_duration, sample_rate=sample_rate)
-    model.fit(sample_info=train_df, audio_dir=audio_dir, min_negatives=2)
+    model.fit(sample_info=train_df, audio_dir=audio_dir, min_negatives=min_negatives)
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
