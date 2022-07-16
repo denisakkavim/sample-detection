@@ -1,4 +1,5 @@
 import click
+import logging
 import os
 import pickle
 
@@ -10,7 +11,11 @@ from sample_detection.scrape.scraper import SampleScraper
 
 @click.group()
 def cli():
-    pass
+
+    log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    logging.basicConfig(level=logging.INFO, format=log_fmt)
+
+    return None
 
 
 @cli.command()
