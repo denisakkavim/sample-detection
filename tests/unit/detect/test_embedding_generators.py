@@ -5,8 +5,8 @@ import pandas as pd
 from ast import literal_eval
 from pathlib import Path
 
-from sample_detection.detect.embedding_generators import (
-    EmbeddingGenerator,
+from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
+from sample_detection.detect.embedding_generators.wav2clip.generator import (
     Wav2ClipEmbeddingGenerator,
 )
 
