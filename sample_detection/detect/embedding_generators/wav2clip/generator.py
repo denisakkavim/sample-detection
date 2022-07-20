@@ -6,7 +6,7 @@ from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
 
 
 class Wav2ClipEmbeddingGenerator(EmbeddingGenerator):
-    def __init__(self, sample_duration, sample_rate):
+    def __init__(self, sample_duration, sample_rate=16000):
 
         super().__init__(sample_duration=sample_duration, sample_rate=sample_rate)
 
