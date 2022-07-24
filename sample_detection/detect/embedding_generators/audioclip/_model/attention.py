@@ -1,3 +1,5 @@
+# credit: Andrey Guzhov https://github.com/AndreyGuzhov/AudioCLIP
+
 import torch
 import torch.nn.functional as F
 

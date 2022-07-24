@@ -1,3 +1,5 @@
+# credit: Andrey Guzhov https://github.com/AndreyGuzhov/AudioCLIP
+
 import numpy as np
 
 import torch

@@ -1,3 +1,5 @@
+# credit: Andrey Guzhov https://github.com/AndreyGuzhov/AudioCLIP
+
 import termcolor
 
 import numpy as np
