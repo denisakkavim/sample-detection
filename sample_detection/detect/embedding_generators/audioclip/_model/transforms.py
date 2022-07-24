@@ -10,8 +10,6 @@ import torchvision as tv
 
 from typing import Callable
 
-# import ignite_trainer as it
-
 
 def scale(old_value, old_min, old_max, new_min, new_max):
     old_range = old_max - old_min
