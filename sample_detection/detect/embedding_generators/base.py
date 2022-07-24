@@ -71,8 +71,7 @@ class EmbeddingGenerator(ABC):
         :param audio_dir: Directory containing the audio files scraped by the scraper.
         :type audio_dir: str
 
-        :return: Whether the sample was loaded successfully, and a nested dictionary of
-        embeddings, with filenames and sample start times as keys, and audio arrays as values.
+        :return: Whether the sample was loaded successfully, and a nested dictionary of embeddings, with filenames and sample start times as keys, and audio arrays as values.
         """
 
         self.logger.info(f'Loading sample with whosampled_id {sample["whosampled_id"]}')
@@ -140,8 +139,7 @@ class EmbeddingGenerator(ABC):
         :param audio_dir: Directory containing the audio files scraped by the scraper.
         :type audio_dir: str
 
-        :return: Dataframe of samples for which embeddings were succesfully generated, and a nested dictionary of
-        embeddings, with filenames and sample start times as keys, and embeddings as values.
+        :return: Dataframe of samples for which embeddings were succesfully generated, and a nested dictionary of embeddings, with filenames and sample start times as keys, and embeddings as values.
         """
 
         self.logger.info(f"Generating embeddings for audio in {audio_dir}")
