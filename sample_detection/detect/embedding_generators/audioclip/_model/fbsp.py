@@ -5,9 +5,11 @@ import torch.nn.functional as F
 
 import torchvision as tv
 
-import sample_detection.detect.embedding_generators.audioclip.model.transforms as transforms
-from sample_detection.detect.embedding_generators.audioclip.model.base import _ESResNet
-from sample_detection.detect.embedding_generators.audioclip.model.base import Bottleneck
+import sample_detection.detect.embedding_generators.audioclip._model.transforms as transforms
+from sample_detection.detect.embedding_generators.audioclip._model.base import _ESResNet
+from sample_detection.detect.embedding_generators.audioclip._model.base import (
+    Bottleneck,
+)
 
 from typing import cast
 from typing import List

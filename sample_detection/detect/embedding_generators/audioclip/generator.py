@@ -5,7 +5,7 @@ import torch
 
 
 from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
-from sample_detection.detect.embedding_generators.audioclip.model.fbsp import (
+from sample_detection.detect.embedding_generators.audioclip._model.fbsp import (
     ESResNeXtFBSP,
 )
 

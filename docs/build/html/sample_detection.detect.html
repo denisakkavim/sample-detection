@@ -39,11 +39,10 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">sample_detection.detect package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-sample_detection.detect.audio">sample_detection.detect.audio module</a></li>
-<li><a class="reference internal" href="#module-sample_detection.detect.embedding_generators">sample_detection.detect.embedding_generators module</a></li>
 <li><a class="reference internal" href="#module-sample_detection.detect.sample_detector">sample_detection.detect.sample_detector module</a></li>
-<li><a class="reference internal" href="#module-sample_detection.detect.sample_loader">sample_detection.detect.sample_loader module</a></li>
 <li><a class="reference internal" href="#module-sample_detection.detect">Module contents</a></li>
 </ul>
 </li>
@@ -75,6 +74,34 @@
              
   <section id="sample-detection-detect-package">
 <h1>sample_detection.detect package<a class="headerlink" href="#sample-detection-detect-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sample_detection.detect.embedding_generators.html">sample_detection.detect.embedding_generators package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.embedding_generators.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sample_detection.detect.embedding_generators.audioclip.html">sample_detection.detect.embedding_generators.audioclip package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sample_detection.detect.embedding_generators.audioclip.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sample_detection.detect.embedding_generators.audioclip.html#module-sample_detection.detect.embedding_generators.audioclip.generator">sample_detection.detect.embedding_generators.audioclip.generator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sample_detection.detect.embedding_generators.audioclip.html#module-sample_detection.detect.embedding_generators.audioclip">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sample_detection.detect.embedding_generators.wav2clip.html">sample_detection.detect.embedding_generators.wav2clip package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sample_detection.detect.embedding_generators.wav2clip.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sample_detection.detect.embedding_generators.wav2clip.html#module-sample_detection.detect.embedding_generators.wav2clip.generator">sample_detection.detect.embedding_generators.wav2clip.generator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sample_detection.detect.embedding_generators.wav2clip.html#module-sample_detection.detect.embedding_generators.wav2clip">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.embedding_generators.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.embedding_generators.html#module-sample_detection.detect.embedding_generators.base">sample_detection.detect.embedding_generators.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample_detection.detect.embedding_generators.html#module-sample_detection.detect.embedding_generators">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
@@ -118,69 +145,11 @@
 </dd></dl>
 
 </section>
-<section id="module-sample_detection.detect.embedding_generators">
-<span id="sample-detection-detect-embedding-generators-module"></span><h2>sample_detection.detect.embedding_generators module<a class="headerlink" href="#module-sample_detection.detect.embedding_generators" title="Permalink to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sample_detection.detect.embedding_generators.EmbeddingGenerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.detect.embedding_generators.</span></span><span class="sig-name descname"><span class="pre">EmbeddingGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.detect.embedding_generators.EmbeddingGenerator" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sample_detection.detect.embedding_generators.EmbeddingGenerator.generate_embedding">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_embedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sample_detection.detect.embedding_generators.EmbeddingGenerator.generate_embedding" title="Permalink to this definition"></a></dt>
-<dd><p>Generate an embedding from an audio clip (represented as a 1D ndarray).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>audio_array</strong> (<em>np.ndarray</em>) – 1D np.ndarray representation of an audio clip</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Embedding</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sample_detection.detect.embedding_generators.EmbeddingGenerator.generate_embeddings_from_directory">
-<span class="sig-name descname"><span class="pre">generate_embeddings_from_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sample_detection.detect.embedding_generators.EmbeddingGenerator.generate_embeddings_from_directory" title="Permalink to this definition"></a></dt>
-<dd><p>Generate an embedding from an audio clip (represented as a 1D ndarray).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sample_info</strong> (<em>pd.DataFrame</em>) – Sample info (as scraped from scraper), with sample times as lists</p></li>
-<li><p><strong>audio_dir</strong> (<em>str</em>) – Directory containing the audio files scraped by the scraper.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe of samples for which embeddings were succesfully generated, and a nested dictionary of</p>
-</dd>
-</dl>
-<p>embeddings, with filenames and sample start times as keys, and embeddings as values.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="sample_detection.detect.embedding_generators.Wav2ClipEmbeddingGenerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.detect.embedding_generators.</span></span><span class="sig-name descname"><span class="pre">Wav2ClipEmbeddingGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.detect.embedding_generators.Wav2ClipEmbeddingGenerator" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sample_detection.detect.embedding_generators.EmbeddingGenerator" title="sample_detection.detect.embedding_generators.EmbeddingGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmbeddingGenerator</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sample_detection.detect.embedding_generators.Wav2ClipEmbeddingGenerator.generate_embedding">
-<span class="sig-name descname"><span class="pre">generate_embedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#sample_detection.detect.embedding_generators.Wav2ClipEmbeddingGenerator.generate_embedding" title="Permalink to this definition"></a></dt>
-<dd><p>Generate a wav2clip embedding from an audio clip (represented as a 1D ndarray).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Embedding</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
 <section id="module-sample_detection.detect.sample_detector">
 <span id="sample-detection-detect-sample-detector-module"></span><h2>sample_detection.detect.sample_detector module<a class="headerlink" href="#module-sample_detection.detect.sample_detector" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sample_detection.detect.sample_detector.SampleDetector">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.detect.sample_detector.</span></span><span class="sig-name descname"><span class="pre">SampleDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_generator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sample_detection.detect.embedding_generators.EmbeddingGenerator" title="sample_detection.detect.embedding_generators.EmbeddingGenerator"><span class="pre">EmbeddingGenerator</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'constant'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate_init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_layer_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(256,</span> <span class="pre">64)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.detect.sample_detector.SampleDetector" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.detect.sample_detector.</span></span><span class="sig-name descname"><span class="pre">SampleDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_generator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="sample_detection.detect.embedding_generators.html#sample_detection.detect.embedding_generators.base.EmbeddingGenerator" title="sample_detection.detect.embedding_generators.base.EmbeddingGenerator"><span class="pre">EmbeddingGenerator</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'constant'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate_init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_layer_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(256,</span> <span class="pre">64)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.detect.sample_detector.SampleDetector" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sample_detection.detect.sample_detector.SampleDetector.find_samples">
@@ -228,33 +197,6 @@ under the sample_duration attribute).</p>
 <dd class="field-odd"><p>Score indicating likelihood that one audioclip contains a sample of another</p>
 </dd>
 </dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="module-sample_detection.detect.sample_loader">
-<span id="sample-detection-detect-sample-loader-module"></span><h2>sample_detection.detect.sample_loader module<a class="headerlink" href="#module-sample_detection.detect.sample_loader" title="Permalink to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="sample_detection.detect.sample_loader.SampleLoader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.detect.sample_loader.</span></span><span class="sig-name descname"><span class="pre">SampleLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.detect.sample_loader.SampleLoader" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sample_detection.detect.sample_loader.SampleLoader.load_sample">
-<span class="sig-name descname"><span class="pre">load_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sample_detection.detect.sample_loader.SampleLoader.load_sample" title="Permalink to this definition"></a></dt>
-<dd><p>Load audio for both songs in a sample.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sample</strong> (<em>pd.Series</em>) – Row from sample info dataframe (as scraped by scraper), with sample times as lists</p></li>
-<li><p><strong>audio_dir</strong> (<em>str</em>) – Directory containing the audio files scraped by the scraper.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Whether the sample was loaded successfully, and a nested dictionary of</p>
-</dd>
-</dl>
-<p>embeddings, with filenames and sample start times as keys, and audio arrays as values.</p>
 </dd></dl>
 
 </dd></dl>

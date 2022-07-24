@@ -10,8 +10,8 @@ import torchvision as tv
 
 # import ignite_trainer as it
 
-import sample_detection.detect.embedding_generators.audioclip.model.attention as attention
-from sample_detection.detect.embedding_generators.audioclip.model.transforms import (
+import sample_detection.detect.embedding_generators.audioclip._model.attention as attention
+from sample_detection.detect.embedding_generators.audioclip._model.transforms import (
     scale,
 )
 

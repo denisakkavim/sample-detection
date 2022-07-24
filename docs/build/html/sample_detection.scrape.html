@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sample_detection.scrape package &mdash; Sample Detection 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Sample Detection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">sample_detection.scrape package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-sample_detection.scrape.base">sample_detection.scrape.base module</a></li>
+<li><a class="reference internal" href="#module-sample_detection.scrape.load">sample_detection.scrape.load module</a></li>
+<li><a class="reference internal" href="#sample-detection-scrape-scraper-module">sample_detection.scrape.scraper module</a></li>
+<li><a class="reference internal" href="#module-sample_detection.scrape.whosampled">sample_detection.scrape.whosampled module</a></li>
+<li><a class="reference internal" href="#module-sample_detection.scrape.youtube">sample_detection.scrape.youtube module</a></li>
+<li><a class="reference internal" href="#module-sample_detection.scrape">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Sample Detection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>sample_detection.scrape package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sample_detection.scrape.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sample-detection-scrape-package">
+<h1>sample_detection.scrape package<a class="headerlink" href="#sample-detection-scrape-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-sample_detection.scrape.base">
+<span id="sample-detection-scrape-base-module"></span><h2>sample_detection.scrape.base module<a class="headerlink" href="#module-sample_detection.scrape.base" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sample_detection.scrape.base.BaseScraper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.scrape.base.</span></span><span class="sig-name descname"><span class="pre">BaseScraper</span></span><a class="headerlink" href="#sample_detection.scrape.base.BaseScraper" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.base.BaseScraper.extract_filename_from_filepath">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract_filename_from_filepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#sample_detection.scrape.base.BaseScraper.extract_filename_from_filepath" title="Permalink to this definition"></a></dt>
+<dd><p>Given a path to a file, extract the name of the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – path to file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>filename of file in path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.base.BaseScraper.get_web_page">
+<span class="sig-name descname"><span class="pre">get_web_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_between_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BeautifulSoup</span></span></span><a class="headerlink" href="#sample_detection.scrape.base.BaseScraper.get_web_page" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the HTML content of a webpage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – URL of the webpage to get content from</p></li>
+<li><p><strong>attempts</strong> (<em>int</em>) – Number of attempts to reach the webpage</p></li>
+<li><p><strong>wait_between_attempts</strong> (<em>int</em>) – Time (in seconds) to wait between attempts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bs4.BeautifulSoup</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TimeoutError</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The HTML contents of the webpage at the given url, as a BeautifulSoup object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.base.BaseScraper.scrape">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scrape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.scrape.base.BaseScraper.scrape" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sample_detection.scrape.load">
+<span id="sample-detection-scrape-load-module"></span><h2>sample_detection.scrape.load module<a class="headerlink" href="#module-sample_detection.scrape.load" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sample_detection.scrape.load.load_sample_info">
+<span class="sig-prename descclassname"><span class="pre">sample_detection.scrape.load.</span></span><span class="sig-name descname"><span class="pre">load_sample_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_info_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#sample_detection.scrape.load.load_sample_info" title="Permalink to this definition"></a></dt>
+<dd><p>Load sample info from csv, with sample times as lists (as expected by other
+functions in this library).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sample_info_path</strong> (<em>str</em>) – Path to sample info</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sample info (as scraped from scraper), with sample times as lists</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sample-detection-scrape-scraper-module">
+<h2>sample_detection.scrape.scraper module<a class="headerlink" href="#sample-detection-scrape-scraper-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-sample_detection.scrape.whosampled">
+<span id="sample-detection-scrape-whosampled-module"></span><h2>sample_detection.scrape.whosampled module<a class="headerlink" href="#module-sample_detection.scrape.whosampled" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sample_detection.scrape.whosampled.WhosampledScraper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.scrape.whosampled.</span></span><span class="sig-name descname"><span class="pre">WhosampledScraper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attempts_per_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_between_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.scrape.whosampled.WhosampledScraper" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sample_detection.scrape.base.BaseScraper" title="sample_detection.scrape.base.BaseScraper"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseScraper</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.whosampled.WhosampledScraper.get_sample_details">
+<span class="sig-name descname"><span class="pre">get_sample_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sample_detection.scrape.whosampled.WhosampledScraper.get_sample_details" title="Permalink to this definition"></a></dt>
+<dd><p>Get the details of a sample: the WhoSampled sample ID (scraped from the URL), links to (on WhoSampled) the songs in the sample, YouTube
+IDs for the songs on YouTube (assuming they exist), and the type of sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sample_url</strong> (<em>str</em>) – URL for a sample, relative to whosampled.com (as returned by sample_detection.scraper.whosampled.get_samples_on_page)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict containing details of the sample at the given URL</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.whosampled.WhosampledScraper.get_samples_on_page">
+<span class="sig-name descname"><span class="pre">get_samples_on_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BeautifulSoup</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sample_detection.scrape.whosampled.WhosampledScraper.get_samples_on_page" title="Permalink to this definition"></a></dt>
+<dd><p>Get the URLs of all samples on the a given WhoSampled page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>page</strong> (<em>bs4.BeautifulSoup</em>) – HTML contents of a page on WhoSampled, as returned by sample_detection.scraper.web.get_page.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of strings. Each string is the URL of a sample on WhoSampled, relative to whosampled.com (e.g: if the full URL would be</p>
+</dd>
+</dl>
+<p><a class="reference external" href="https://www.whosampled.com/sample/729975/Dua-Lipa-Love-Again-Lew-Stone-%26-the-Monseigneur-Band-Al-Bowlly-My-Woman/">https://www.whosampled.com/sample/729975/Dua-Lipa-Love-Again-Lew-Stone-%26-the-Monseigneur-Band-Al-Bowlly-My-Woman/</a>, the string in the list
+would be /sample/729975/Dua-Lipa-Love-Again-Lew-Stone-%26-the-Monseigneur-Band-Al-Bowlly-My-Woman/).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.whosampled.WhosampledScraper.scrape">
+<span class="sig-name descname"><span class="pre">scrape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2010</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2020</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pages_per_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#sample_detection.scrape.whosampled.WhosampledScraper.scrape" title="Permalink to this definition"></a></dt>
+<dd><p>Scrape WhoSample for samples in between (and including) the start and end year. Goes through pages_per_year
+pages of search results for each year.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_year</strong> (<em>int</em>) – First year to get samples from</p></li>
+<li><p><strong>end_year</strong> (<em>int</em>) – Last year to get samples from</p></li>
+<li><p><strong>pages_per_year</strong> (<em>int</em>) – Number of pages of search results to go through for each year</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe containing sample details as gotten from sample_detection.scraper.whosampled.get_sample_details</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sample_detection.scrape.youtube">
+<span id="sample-detection-scrape-youtube-module"></span><h2>sample_detection.scrape.youtube module<a class="headerlink" href="#module-sample_detection.scrape.youtube" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sample_detection.scrape.youtube.YoutubeScraper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sample_detection.scrape.youtube.</span></span><span class="sig-name descname"><span class="pre">YoutubeScraper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sample_detection.scrape.youtube.YoutubeScraper" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sample_detection.scrape.base.BaseScraper" title="sample_detection.scrape.base.BaseScraper"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseScraper</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.youtube.YoutubeScraper.download_youtube_audio">
+<span class="sig-name descname"><span class="pre">download_youtube_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">youtube_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#sample_detection.scrape.youtube.YoutubeScraper.download_youtube_audio" title="Permalink to this definition"></a></dt>
+<dd><p>Download audio from a given YouTube video.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>youtube_id</strong> (<em>str</em>) – The ID of the YouTube video to download</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em>) – The directory to save the downloaded file in</p></li>
+<li><p><strong>file_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of the downloaded file. Defaults to the YouTube ID of the video being downloaded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether the download was successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sample_detection.scrape.youtube.YoutubeScraper.scrape">
+<span class="sig-name descname"><span class="pre">scrape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">youtube_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#sample_detection.scrape.youtube.YoutubeScraper.scrape" title="Permalink to this definition"></a></dt>
+<dd><p>Download the audio for the videos with the given YouTube IDs, and save them in save_dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>youtube_ids</strong> (<em>Iterable</em>) – IDs of YouTube videos to download the audio from</p></li>
+<li><p><strong>save_dir</strong> (<em>str</em>) – Path to the folder in which the downloaded audio should be saved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sample_detection.scrape">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sample_detection.scrape" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Denis Akkavim.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
