@@ -149,16 +149,6 @@ class EmbeddingGenerator(ABC):
         bad_samples = set()
         embeddings = dict()
 
-        """
-        embeddings = {
-            youtube_id: {}
-            for youtube_id in (
-                set(sample_info["sample_from_ytid"])
-                | set(sample_info["sample_in_ytid"])
-            )
-        }
-        """
-
         for _, row in sample_info.iterrows():
 
             sample_good, sample_audio = self.load_sample(
