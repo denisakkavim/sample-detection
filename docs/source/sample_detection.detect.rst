@@ -1,6 +1,14 @@
 sample\_detection.detect package
 ================================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   sample_detection.detect.embedding_generators
+
 Submodules
 ----------
 
@@ -12,26 +20,10 @@ sample\_detection.detect.audio module
    :undoc-members:
    :show-inheritance:
 
-sample\_detection.detect.embedding\_generators module
------------------------------------------------------
-
-.. automodule:: sample_detection.detect.embedding_generators
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 sample\_detection.detect.sample\_detector module
 ------------------------------------------------
 
 .. automodule:: sample_detection.detect.sample_detector
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-sample\_detection.detect.sample\_loader module
-----------------------------------------------
-
-.. automodule:: sample_detection.detect.sample_loader
    :members:
    :undoc-members:
    :show-inheritance:

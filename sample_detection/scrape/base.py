@@ -1,4 +1,5 @@
 import logging
+import os
 
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
@@ -73,10 +74,9 @@ class BaseScraper(ABC):
         :rtype: str
         """
 
-        FILE_SPLIT_INDEX = -1
         ID_SPLIT_INDEX = 0
 
-        filename = path.split("/")[FILE_SPLIT_INDEX].split(".")[ID_SPLIT_INDEX]
+        filename = os.path.basename(path).split(".")[ID_SPLIT_INDEX]
 
         return filename
 

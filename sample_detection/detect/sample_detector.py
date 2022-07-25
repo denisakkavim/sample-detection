@@ -7,8 +7,8 @@ import torch
 from sklearn.neural_network import MLPClassifier
 from typing import Dict, List, Optional, Set, Tuple
 
-from sample_detection.detect.embedding_generators import (
-    EmbeddingGenerator,
+from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
+from sample_detection.detect.embedding_generators.wav2clip.generator import (
     Wav2ClipEmbeddingGenerator,
 )
 from sample_detection.detect.audio import Audio

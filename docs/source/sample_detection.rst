@@ -8,7 +8,7 @@ Subpackages
    :maxdepth: 4
 
    sample_detection.detect
-   sample_detection.scraper
+   sample_detection.scrape
 
 Submodules
 ----------
@@ -17,14 +17,6 @@ sample\_detection.cli module
 ----------------------------
 
 .. automodule:: sample_detection.cli
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-sample\_detection.load module
------------------------------
-
-.. automodule:: sample_detection.load
    :members:
    :undoc-members:
    :show-inheritance:
