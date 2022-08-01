@@ -44,15 +44,22 @@ class EmbeddingGenerator(ABC):
             f"Loading audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
         )
         try:
-            audio_array, _ = librosa.load(
-                path=audio_path,
-                sr=self.sample_rate,
-                offset=start_time,
-                duration=self.sample_duration,
-            )
+
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                audio_array, _ = librosa.load(
+                    path=audio_path,
+                    sr=self.sample_rate,
+                    offset=start_time,
+                    duration=self.sample_duration,
+                )
             self.logger.info(
                 f"Successfully loaded audio from file at {audio_path}, between {start_time}s and {start_time + self.sample_duration} seconds"
             )
+            if len(audio_array) != self.sample_rate * self.sample_duration:
+                raise ValueError(
+                    "Audio array is shorter than it should be - will cause issues with embedding generators."
+                )
             return audio_array
         except (ValueError, FileNotFoundError) as e:
             self.logger.info(
@@ -84,6 +91,7 @@ class EmbeddingGenerator(ABC):
 
         try:
             with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
                 audio_dict = {
                     sample["sample_from_ytid"]: {
                         time: self._load_audio(
