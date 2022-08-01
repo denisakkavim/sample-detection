@@ -6,8 +6,6 @@
 
 import click
 import logging
-import os
-import pickle
 
 from sample_detection.detect.embedding_generators.audioclip.generator import (
     AudioCLIPEmbeddingGenerator,
@@ -15,10 +13,83 @@ from sample_detection.detect.embedding_generators.audioclip.generator import (
 from sample_detection.detect.embedding_generators.wav2clip.generator import (
     Wav2ClipEmbeddingGenerator,
 )
+from sample_detection.detect.embedding_generators.musicnn.generator import (
+    MusicNNEmbeddingGenerator,
+    MusicNNMaxPoolEmbeddingGenerator,
+    MusicNNMeanPoolEmbeddingGenerator,
+)
 from sample_detection.detect.sample_detector import SampleDetector
 from sample_detection.scrape.load import load_sample_info
 
 from sklearn.metrics import roc_auc_score, average_precision_score
+
+
+def evaluate_embedding_generator(
+    audio_dir,
+    min_negatives,
+    embedding_generator,
+    train_df,
+    eval_df,
+    train_negative_samples=None,
+    eval_negative_samples=None,
+):
+
+    return_samples = (train_negative_samples is None) and (
+        eval_negative_samples is None
+    )
+
+    model = SampleDetector(
+        sample_duration=15, sample_rate=44100, embedding_generator=embedding_generator
+    )
+
+    # train model
+
+    (train_df, embeddings,) = embedding_generator.generate_embeddings_from_directory(
+        sample_info=train_df, audio_dir=audio_dir
+    )
+
+    if train_negative_samples is None:
+        train_negative_samples = model._generate_negative_samples(
+            sample_info=train_df, min_negatives=min_negatives
+        )
+
+    features, labels = model._format_embeddings(
+        embeddings=embeddings,
+        sample_info=train_df,
+        negative_samples=train_negative_samples,
+    )
+
+    model.embedding_comparer.fit(X=features, y=labels)
+
+    # eval model
+
+    (
+        eval_df,
+        eval_embeddings,
+    ) = embedding_generator.generate_embeddings_from_directory(
+        sample_info=eval_df, audio_dir=audio_dir
+    )
+
+    if eval_negative_samples is None:
+        eval_negative_samples = model._generate_negative_samples(
+            sample_info=eval_df, min_negatives=min_negatives
+        )
+
+    eval_features, eval_labels = model._format_embeddings(
+        embeddings=eval_embeddings,
+        sample_info=eval_df,
+        negative_samples=eval_negative_samples,
+    )
+
+    eval_scores = model.embedding_comparer.predict_proba(eval_features)[:, 1]
+
+    roc_auc = roc_auc_score(y_true=eval_labels, y_score=eval_scores)
+    ap = average_precision_score(y_true=eval_labels, y_score=eval_scores)
+
+    if return_samples:
+        return roc_auc, ap, train_negative_samples, eval_negative_samples
+    else:
+        return roc_auc, ap
 
 
 @click.command()
@@ -33,110 +104,86 @@ def main(val_info_path, train_info_path, audio_dir, min_negatives):
     train_df = load_sample_info(train_info_path)
     eval_df = load_sample_info(val_info_path)
 
+    musicnn_max_emb_gen = MusicNNMaxPoolEmbeddingGenerator(sample_duration=15)
+
+    (
+        mnn_max_roc,
+        mnn_max_ap,
+        train_negative_samples,
+        eval_negative_samples,
+    ) = evaluate_embedding_generator(
+        audio_dir=audio_dir,
+        min_negatives=min_negatives,
+        embedding_generator=musicnn_max_emb_gen,
+        train_df=train_df,
+        eval_df=eval_df,
+    )
+
+    musicnn_mean_emb_gen = MusicNNMeanPoolEmbeddingGenerator(sample_duration=15)
+
+    (mnn_mean_roc, mnn_mean_ap,) = evaluate_embedding_generator(
+        audio_dir=audio_dir,
+        min_negatives=min_negatives,
+        embedding_generator=musicnn_mean_emb_gen,
+        train_df=train_df,
+        eval_df=eval_df,
+        train_negative_samples=train_negative_samples,
+        eval_negative_samples=eval_negative_samples,
+    )
+
+    musicnn_cat_emb_gen = MusicNNEmbeddingGenerator(sample_duration=15)
+
+    (mnn_cat_roc, mnn_cat_ap,) = evaluate_embedding_generator(
+        audio_dir=audio_dir,
+        min_negatives=min_negatives,
+        embedding_generator=musicnn_cat_emb_gen,
+        train_df=train_df,
+        eval_df=eval_df,
+        train_negative_samples=train_negative_samples,
+        eval_negative_samples=eval_negative_samples,
+    )
+
+    w2c_emb_gen = Wav2ClipEmbeddingGenerator(sample_duration=15)
+
+    (w2c_roc, w2c_ap,) = evaluate_embedding_generator(
+        audio_dir=audio_dir,
+        min_negatives=min_negatives,
+        embedding_generator=w2c_emb_gen,
+        train_df=train_df,
+        eval_df=eval_df,
+        train_negative_samples=train_negative_samples,
+        eval_negative_samples=eval_negative_samples,
+    )
+
     aclp_emb_gen = AudioCLIPEmbeddingGenerator(
         embedding_model_path="../models/embedding_generators/state_dict.pt",
         sample_duration=15,
     )
 
-    model = SampleDetector(
-        sample_duration=15, sample_rate=44100, embedding_generator=aclp_emb_gen
+    (aclp_roc, aclp_ap,) = evaluate_embedding_generator(
+        audio_dir=audio_dir,
+        min_negatives=min_negatives,
+        embedding_generator=aclp_emb_gen,
+        train_df=train_df,
+        eval_df=eval_df,
+        train_negative_samples=train_negative_samples,
+        eval_negative_samples=eval_negative_samples,
     )
 
-    # train model
+    logger.info(f"MusicNN Max Pool AUC score: {mnn_max_roc}")
+    logger.info(f"MusicNN Max Pool Average Precision score: {mnn_max_ap}")
 
-    (train_df, embeddings,) = aclp_emb_gen.generate_embeddings_from_directory(
-        sample_info=train_df, audio_dir=audio_dir
-    )
+    logger.info(f"MusicNN Mean Pool AUC score: {mnn_mean_roc}")
+    logger.info(f"MusicNN Mean Pool Average Precision score: {mnn_mean_ap}")
 
-    negative_samples = model._generate_negative_samples(
-        sample_info=train_df, min_negatives=min_negatives
-    )
+    logger.info(f"MusicNN concat AUC score: {mnn_cat_roc}")
+    logger.info(f"MusicNN concat Average Precision score: {mnn_cat_ap}")
 
-    features, labels = model._format_embeddings(
-        embeddings=embeddings,
-        sample_info=train_df,
-        negative_samples=negative_samples,
-    )
-
-    model.embedding_comparer.fit(X=features, y=labels)
-
-    if not os.path.exists("../models/train/audioclip/"):
-        os.makedirs("../models/train/audioclip/")
-
-    with open("../models/train/audioclip/train.pkl", "wb") as f:
-        pickle.dump(model, f)
-
-    # eval model
-
-    (eval_df, eval_embeddings,) = aclp_emb_gen.generate_embeddings_from_directory(
-        sample_info=eval_df, audio_dir=audio_dir
-    )
-
-    eval_negative_samples = model._generate_negative_samples(
-        sample_info=eval_df, min_negatives=min_negatives
-    )
-
-    eval_features, eval_labels = model._format_embeddings(
-        embeddings=eval_embeddings,
-        sample_info=eval_df,
-        negative_samples=eval_negative_samples,
-    )
-
-    eval_scores = model.embedding_comparer.predict_proba(eval_features)[:, 1]
-
-    audioclip_roc_auc = roc_auc_score(y_true=eval_labels, y_score=eval_scores)
-    audioclip_ap = average_precision_score(y_true=eval_labels, y_score=eval_scores)
-
-    logger.info(f"AudioCLIP ROC AUC score: {audioclip_roc_auc}")
-    logger.info(f"AudioCLIP Average Precision score: {audioclip_ap}")
-
-    w2c_emb_gen = Wav2ClipEmbeddingGenerator(sample_duration=15)
-
-    model = SampleDetector(
-        sample_duration=15, sample_rate=16000, embedding_generator=w2c_emb_gen
-    )
-
-    # train model
-
-    (train_df, embeddings,) = w2c_emb_gen.generate_embeddings_from_directory(
-        sample_info=train_df, audio_dir=audio_dir
-    )
-
-    features, labels = model._format_embeddings(
-        embeddings=embeddings,
-        sample_info=train_df,
-        negative_samples=negative_samples,  # we should re-use the existing negative samples
-    )
-
-    model.embedding_comparer.fit(X=features, y=labels)
-
-    if not os.path.exists("../models/train/wav2clip/"):
-        os.makedirs("../models/train/wav2clip/")
-
-    with open("../models/train/wav2clip/train.pkl", "wb") as f:
-        pickle.dump(model, f)
-
-    # eval model
-
-    (eval_df, eval_embeddings,) = w2c_emb_gen.generate_embeddings_from_directory(
-        sample_info=eval_df, audio_dir=audio_dir
-    )
-
-    eval_features, eval_labels = model._format_embeddings(
-        embeddings=eval_embeddings,
-        sample_info=eval_df,
-        negative_samples=eval_negative_samples,  # we should re-use the existing negative samples
-    )
-
-    eval_scores = model.embedding_comparer.predict_proba(eval_features)[:, 1]
-
-    w2c_roc_auc = roc_auc_score(y_true=eval_labels, y_score=eval_scores)
-    w2c_ap = average_precision_score(y_true=eval_labels, y_score=eval_scores)
-
-    logger.info(f"W2C ROC AUC score: {w2c_roc_auc}")
+    logger.info(f"W2C ROC AUC score: {w2c_roc}")
     logger.info(f"W2C Average Precision score: {w2c_ap}")
-    logger.info(f"AudioCLIP ROC AUC score: {audioclip_roc_auc}")
-    logger.info(f"AudioCLIP Average Precision score: {audioclip_ap}")
+
+    logger.info(f"AudioCLIP ROC AUC score: {aclp_roc}")
+    logger.info(f"AudioCLIP Average Precision score: {aclp_ap}")
 
     logger.info("Done!")
 
