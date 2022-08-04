@@ -1,8 +1,17 @@
-# Wav2CLIP ROC AUC score: 0.7402642150002591
-# Wav2CLIP Average Precision score: 0.757070016939695
+# MusicNN Max Pool AUC score: 0.5072202410843203
+# MusicNN Max Pool Average Precision score: 0.5436237020959913
 
-# AudioCLIP ROC AUC score: 0.7350159384232623
-# AudioCLIP Average Precision score: 0.7543083151217709
+# MusicNN Mean Pool AUC score: 0.5130209410967346
+# MusicNN Mean Pool Average Precision score: 0.5366554747223646
+
+# MusicNN concat AUC score: 0.5093614357915598
+# MusicNN concat Average Precision score: 0.5353203430387558
+
+# Wav2CLIP ROC AUC score: 0.7306876567870112
+# W2C Average Precision score: 0.7438677171402897
+
+# AudioCLIP ROC AUC score: 0.7289550309967152
+# AudioCLIP Average Precision score: 0.7345263809248328
 
 import click
 import logging
@@ -179,8 +188,8 @@ def main(val_info_path, train_info_path, audio_dir, min_negatives):
     logger.info(f"MusicNN concat AUC score: {mnn_cat_roc}")
     logger.info(f"MusicNN concat Average Precision score: {mnn_cat_ap}")
 
-    logger.info(f"W2C ROC AUC score: {w2c_roc}")
-    logger.info(f"W2C Average Precision score: {w2c_ap}")
+    logger.info(f"Wav2CLIP ROC AUC score: {w2c_roc}")
+    logger.info(f"Wav2CLIP Average Precision score: {w2c_ap}")
 
     logger.info(f"AudioCLIP ROC AUC score: {aclp_roc}")
     logger.info(f"AudioCLIP Average Precision score: {aclp_ap}")
