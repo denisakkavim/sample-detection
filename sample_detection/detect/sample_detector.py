@@ -21,10 +21,10 @@ class SampleDetector:
         embedding_generator: Optional[EmbeddingGenerator] = None,
         learning_rate: str = "constant",
         learning_rate_init: float = 1e-3,
-        hidden_layer_sizes: Optional[Tuple[int, int]] = (256, 64),
-        activation: Optional[str] = "relu",
-        max_iter: Optional[int] = int(1e7),
-        random_state: Optional[int] = 42,
+        hidden_layer_sizes: Tuple[int, int] = (256, 64),
+        activation: str = "relu",
+        max_iter: int = int(1e7),
+        random_state: int = 42,
     ):
 
         self.logger = logging.getLogger(__name__)
@@ -77,7 +77,7 @@ class SampleDetector:
             group_id: str,
             group_df: pd.DataFrame,
             available_song_ids: Set[str],
-            min_negatives: Optional[int] = 1,
+            min_negatives: int = 1,
         ) -> pd.DataFrame:
 
             negatives = available_song_ids - (
@@ -194,7 +194,7 @@ class SampleDetector:
         return np.vstack(features), np.array(labels)
 
     def fit(
-        self, sample_info: pd.DataFrame, audio_dir: str, min_negatives: int
+        self, sample_info: pd.DataFrame, audio_dir: str, min_negatives: int = 1
     ) -> None:
 
         """Fit the sample detection model.

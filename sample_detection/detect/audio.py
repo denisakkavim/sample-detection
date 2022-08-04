@@ -9,8 +9,10 @@ from typing import Optional
 class Audio:
     def __init__(
         self,
+        audio: Optional[
+            np.ndarray
+        ] = None,  # can either pass in audio as an np array, or specify path, sample_rate, start_time, and clip_length
         path: Optional[str] = None,
-        audio: Optional[np.ndarray] = None,
         sample_rate: Optional[int] = 16000,
         start_time: Optional[str] = 0,
         clip_length: Optional[int] = None,
