@@ -3,6 +3,7 @@ click==8.1.3
 ffmpeg==1.4
 ffmpeg_python==0.2.0
 librosa==0.8.0
+musicnn==0.1.0
 numpy==1.19.5
 pandas==1.4.1
 scikit_learn==1.1.1
