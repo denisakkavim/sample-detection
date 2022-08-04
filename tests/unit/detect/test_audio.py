@@ -76,7 +76,7 @@ def test_get_extract_after_eof(clip_length):
     extract = audioclip.get_extract(
         start_time=len(audioclip) - int(clip_length / 2), extract_length=clip_length
     )
-    assert len(extract) < clip_length
+    assert len(extract) == clip_length
 
 
 def test_get_extract_after_eof_logging(caplog, clip_length):
