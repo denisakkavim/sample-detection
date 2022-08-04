@@ -46,7 +46,7 @@ class MusicNNMeanPoolEmbeddingGenerator(EmbeddingGenerator):
 
     def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
 
-        """Generate a wav2clip embedding from an audio clip (represented as a 1D ndarray).
+        """Generate a musicnn mean-pool embedding from an audio clip (represented as a 1D ndarray).
 
         :return: Embedding
         """
@@ -77,7 +77,7 @@ class MusicNNEmbeddingGenerator(EmbeddingGenerator):
 
     def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
 
-        """Generate a wav2clip embedding from an audio clip (represented as a 1D ndarray).
+        """Generate a musicnn max-pool and mean-pool embedding from an audio clip (represented as a 1D ndarray).
 
         :return: Embedding
         """
