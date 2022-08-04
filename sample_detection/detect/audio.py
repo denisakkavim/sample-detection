@@ -82,6 +82,10 @@ class Audio:
             )
         else:
             self.logger.warning(
-                "Extract length is longer than the remaining audio. Extract will go to the end of the audio file."
+                "Extract length is longer than the remaining audio. Padding remaining audio with zeros."
             )
-            return Audio(audio=self.np_array[self.sample_rate * start_time :])
+            audio_to_end = self.np_array[self.sample_rate * start_time :]
+            padding = np.zeros(
+                shape=(self.sample_rate * extract_length - len(audio_to_end))
+            )
+            return Audio(audio=np.concatenate([audio_to_end, padding]))
