@@ -12,7 +12,10 @@ from sample_detection.detect.embedding_generators.audioclip._model.fbsp import (
 
 class AudioCLIPEmbeddingGenerator(EmbeddingGenerator):
     def __init__(
-        self, embedding_model_path, sample_duration: int = 15, sample_rate: int = 44100
+        self,
+        embedding_model_path: str,
+        sample_duration: int = 15,
+        sample_rate: int = 44100,
     ):
 
         super().__init__(sample_duration=sample_duration, sample_rate=sample_rate)
@@ -34,7 +37,7 @@ class AudioCLIPEmbeddingGenerator(EmbeddingGenerator):
         self.model.load_state_dict(torch.load(embedding_model_path))
         self.model.eval()
 
-    def generate_embedding(self, audio_array):
+    def generate_embedding(self, audio_array: np.ndarray) -> np.ndarray:
 
         with torch.no_grad():
             audio_array = torch.tensor(audio_array.reshape(1, -1))

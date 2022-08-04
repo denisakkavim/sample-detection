@@ -9,8 +9,10 @@ from typing import Optional
 class Audio:
     def __init__(
         self,
+        audio: Optional[
+            np.ndarray
+        ] = None,  # can either pass in audio as an np array, or specify path, sample_rate, start_time, and clip_length
         path: Optional[str] = None,
-        audio: Optional[np.ndarray] = None,
         sample_rate: Optional[int] = 16000,
         start_time: Optional[str] = 0,
         clip_length: Optional[int] = None,
@@ -82,6 +84,11 @@ class Audio:
             )
         else:
             self.logger.warning(
-                "Extract length is longer than the remaining audio. Extract will go to the end of the audio file."
+                "Extract length is longer than the remaining audio. Padding remaining audio with zeros."
             )
-            return Audio(audio=self.np_array[self.sample_rate * start_time :])
+            audio_to_end = self.np_array[self.sample_rate * start_time :]
+            padding = np.zeros(
+                shape=(self.sample_rate * extract_length - len(audio_to_end)),
+                dtype=np.float32,
+            )
+            return Audio(audio=np.concatenate([audio_to_end, padding]))
