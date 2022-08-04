@@ -18,7 +18,6 @@ class SampleDetector:
     def __init__(
         self,
         sample_duration: int,
-        sample_rate: Optional[int] = None,
         embedding_generator: Optional[EmbeddingGenerator] = None,
         learning_rate: str = "constant",
         learning_rate_init: float = 1e-3,
@@ -41,14 +40,9 @@ class SampleDetector:
         random.seed(random_state)
 
         if embedding_generator is None:
-            if sample_rate is None:
-                self.embedding_generator = Wav2ClipEmbeddingGenerator(
-                    sample_duration=sample_duration, sample_rate=16000
-                )
-            else:
-                self.embedding_generator = Wav2ClipEmbeddingGenerator(
-                    sample_duration=sample_duration, sample_rate=sample_rate
-                )
+            self.embedding_generator = Wav2ClipEmbeddingGenerator(
+                sample_duration=sample_duration
+            )
         else:
             self.embedding_generator = embedding_generator
 
