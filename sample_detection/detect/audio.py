@@ -86,6 +86,7 @@ class Audio:
             )
             audio_to_end = self.np_array[self.sample_rate * start_time :]
             padding = np.zeros(
-                shape=(self.sample_rate * extract_length - len(audio_to_end))
+                shape=(self.sample_rate * extract_length - len(audio_to_end)),
+                dtype=np.float32,
             )
             return Audio(audio=np.concatenate([audio_to_end, padding]))
