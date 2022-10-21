@@ -4,7 +4,7 @@ import pandas as pd
 import random
 import torch
 
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple, Union
 
 from sample_detection.detect.audio import Audio
 from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
@@ -12,6 +12,9 @@ from sample_detection.detect.embedding_generators.wav2clip.generator import (
     Wav2ClipEmbeddingGenerator,
 )
 from sample_detection.detect.mlp import MLPClassifier
+
+SamplePairInstance = Tuple[np.ndarray, int]
+DetectedSample = Dict[str, Union[int, float]]
 
 
 class SampleDetector:
@@ -56,7 +59,7 @@ class SampleDetector:
         )
 
     def _generate_negative_samples(
-        self, sample_info: pd.DataFrame, min_negatives: Optional[int] = 1
+        self, sample_info: pd.DataFrame, min_negatives: int = 1
     ) -> pd.DataFrame:
 
         """Given a dataframe of samples, use negative sampling to generate sets
@@ -114,7 +117,7 @@ class SampleDetector:
 
     def _process_positive_samples(
         self, embeddings: Dict[str, Dict[int, np.ndarray]], sample_info: pd.DataFrame
-    ) -> List[Tuple[np.ndarray, int]]:
+    ) -> List[SamplePairInstance]:
 
         feature_list = []
 
@@ -149,7 +152,7 @@ class SampleDetector:
         self,
         embeddings: Dict[str, Dict[int, np.ndarray]],
         negative_samples: pd.DataFrame,
-    ) -> List[Tuple[np.ndarray, int]]:
+    ) -> List[SamplePairInstance]:
 
         feature_list = []
 
@@ -233,7 +236,7 @@ class SampleDetector:
         audio_2: Optional[Audio] = None,
         embedding_1: Optional[np.ndarray] = None,
         embedding_2: Optional[np.ndarray] = None,
-    ):
+    ) -> float:
 
         """Predict whether an audioclip contains a sample of another. All inputs are assumed to be audioclips (
         or embeddings of audioclips) of length sample_duration (specified in constructor, and can be found
@@ -270,7 +273,7 @@ class SampleDetector:
 
     def find_samples(
         self, audio_1: Audio, audio_2: Audio, threshold: float, hop_length: int = 3
-    ) -> List[Dict[str, float]]:
+    ) -> List[DetectedSample]:
 
         """Given two songs, find instances where one song contains a sample of the other.
 

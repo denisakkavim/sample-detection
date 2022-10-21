@@ -9,6 +9,12 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Tuple, Dict, Union
 
+SampleAudio = Dict[int, np.ndarray]  # key is start time, value is np.array of audio
+SampleInstance = Dict[str, Union[None, SampleAudio]]  # key is ytid of song
+
+SampleAudioEmbedding = Dict[int, np.ndarray]
+CollatedSampleAudioEmbeddings = Dict[str, SampleAudioEmbedding]
+
 
 class EmbeddingGenerator(ABC):
     def __init__(
@@ -69,7 +75,7 @@ class EmbeddingGenerator(ABC):
 
     def load_sample(
         self, audio_dir: str, sample: pd.Series
-    ) -> Tuple[bool, Dict[str, Union[None, Dict[int, np.ndarray]]]]:
+    ) -> Tuple[bool, SampleInstance]:
 
         """Load audio for both songs in a sample.
 
@@ -138,7 +144,7 @@ class EmbeddingGenerator(ABC):
 
     def generate_embeddings_from_directory(
         self, sample_info: pd.DataFrame, audio_dir: str
-    ) -> Tuple[pd.DataFrame, Dict[str, Dict[int, np.ndarray]]]:
+    ) -> Tuple[pd.DataFrame, CollatedSampleAudioEmbeddings]:
 
         """Generate an embedding from an audio clip (represented as a 1D ndarray).
 
