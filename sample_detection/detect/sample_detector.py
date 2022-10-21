@@ -12,6 +12,7 @@ from sample_detection.detect.embedding_generators.wav2clip.generator import (
     Wav2ClipEmbeddingGenerator,
 )
 from sample_detection.detect.audio import Audio
+from sample_detection.detect.mlp import MLPClassifier
 
 
 class SampleDetector:
@@ -19,10 +20,10 @@ class SampleDetector:
         self,
         sample_duration: int,
         embedding_generator: Optional[EmbeddingGenerator] = None,
-        learning_rate: str = "constant",
-        learning_rate_init: float = 1e-3,
+        learning_rate: float = 1e-3,
+        dropout: float = 0.0,
+        batch_size: int = 32,
         hidden_layer_sizes: Tuple[int, int] = (256, 64),
-        activation: str = "relu",
         max_iter: int = int(1e7),
         random_state: int = 42,
     ):
@@ -47,12 +48,12 @@ class SampleDetector:
             self.embedding_generator = embedding_generator
 
         self.embedding_comparer = MLPClassifier(
+            dropout=dropout,
+            batch_size=batch_size,
             learning_rate=learning_rate,
-            learning_rate_init=learning_rate_init,
             hidden_layer_sizes=hidden_layer_sizes,
-            activation=activation,
             max_iter=max_iter,
-            random_state=random_state,
+            tol=1e-4,
         )
 
     def _generate_negative_samples(
