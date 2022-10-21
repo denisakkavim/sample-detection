@@ -56,7 +56,7 @@ class SampleDetector:
         )
 
     def _generate_negative_samples(
-        self, sample_info: pd.DataFrame, min_negatives: Optional[int] = 1
+        self, sample_info: pd.DataFrame, min_negatives: int = 1
     ) -> pd.DataFrame:
 
         """Given a dataframe of samples, use negative sampling to generate sets

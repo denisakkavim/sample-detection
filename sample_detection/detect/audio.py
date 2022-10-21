@@ -13,16 +13,17 @@ class Audio:
             np.ndarray
         ] = None,  # can either pass in audio as an np array, or specify path, sample_rate, start_time, and clip_length
         path: Optional[str] = None,
-        sample_rate: Optional[int] = 16000,
-        start_time: Optional[str] = 0,
+        sample_rate: int = 16000,
+        start_time: int = 0,
         clip_length: Optional[int] = None,
     ):
 
-        self.logger = logging.getLogger(__name__)
+        self.logger: logging.Logger = logging.getLogger(__name__)
         self.logger.propagate = True
 
-        self.sample_rate = sample_rate
+        self.sample_rate: int = sample_rate
 
+        # convert Path object to string since loading fails if path is not given as a string:
         if isinstance(path, Path):
             path = str(path)
 
