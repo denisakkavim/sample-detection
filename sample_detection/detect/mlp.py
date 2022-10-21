@@ -13,7 +13,7 @@ class MLPClassifier:
         bias: bool = True,
         batch_size: int = 32,
         learning_rate: float = 1e-3,
-        hidden_layer_sizes: Tuple[int, int] = (256, 64),
+        hidden_layer_sizes: Tuple[int, ...] = (256, 64),
         max_iter: int = 1000,
         tol: float = 1e-4,
     ) -> None:
