@@ -13,7 +13,6 @@ from sample_detection.scrape.base import BaseScraper
 
 class WhosampledScraper(BaseScraper):
     def __init__(self, attempts_per_page: int = 10, wait_between_attempts: int = 30):
-
         """Create a WhoSampled Scraper.
 
         :param attempts_per_page: Number of attempts that should be made to load a given page
@@ -31,10 +30,9 @@ class WhosampledScraper(BaseScraper):
         self.wait_between_attempts = wait_between_attempts
 
     def get_samples_on_page(self, page: BeautifulSoup) -> List[str]:
-
         """Get the URLs of all samples on the a given WhoSampled page.
 
-        :param page: HTML contents of a page on WhoSampled, as returned by sample_detection.scraper.web.get_page.
+        :param page: HTML contents of a page on WhoSampled, as returned by sample_detection.scraper.get_web_page.
         :type page: bs4.BeautifulSoup
 
         :return: List of strings. Each string is the URL of a sample on WhoSampled, relative to whosampled.com (e.g: if the full URL would be
@@ -51,12 +49,11 @@ class WhosampledScraper(BaseScraper):
         sample_urls_on_page = []
 
         for song in songs_on_page:
-
             try:
                 sampled_songs = song.find(
                     name="span",
                     attrs={"class": "sampleAction"},
-                    string=re.compile("\nsampled\n"),
+                    string=re.compile("sampled\n"),
                 ).parent.find_all(name="a", attrs={"class": "connectionName playIcon"})
             except AttributeError:
                 # If there are no sampled songs on the current page (may happen if a song is sampled far more often than it uses samples),
@@ -70,7 +67,6 @@ class WhosampledScraper(BaseScraper):
         return sample_urls_on_page
 
     def get_sample_details(self, sample_url: str) -> Dict[str, str]:
-
         """Get the details of a sample: the WhoSampled sample ID (scraped from the URL), links to (on WhoSampled) the songs in the sample, YouTube
         IDs for the songs on YouTube (assuming they exist), and the type of sample.
 
@@ -156,7 +152,6 @@ class WhosampledScraper(BaseScraper):
     def scrape(
         self, start_year: int = 2010, end_year: int = 2020, pages_per_year: int = 50
     ) -> pd.DataFrame:
-
         """Scrape WhoSample for samples in between (and including) the start and end year. Goes through pages_per_year
         pages of search results for each year.
 
@@ -181,7 +176,6 @@ class WhosampledScraper(BaseScraper):
         self.logger.info("Getting sample details from WhoSampled.")
 
         for year, browse_page in pages_to_scrape:
-
             try:
                 browse_page_url = (
                     f"{self.base_url}/browse/year/{year}/samples/{browse_page}/"

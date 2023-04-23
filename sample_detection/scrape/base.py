@@ -15,7 +15,6 @@ class BaseScraper(ABC):
     def get_web_page(
         self, url: str, attempts: int = 5, wait_between_attempts: int = 10
     ) -> BeautifulSoup:
-
         """Gets the HTML content of a webpage.
 
         :param url: URL of the webpage to get content from
@@ -64,8 +63,7 @@ class BaseScraper(ABC):
 
     @staticmethod
     def extract_filename_from_filepath(path: str) -> str:
-
-        """Given a path to a file, extract the name of the file.
+        """Given a path to a file, extract the name of the file without the extension.
 
         :param path: path to file
         :type path: str
