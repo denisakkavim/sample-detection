@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from sample_detection.scrape.load import load_sample_info
 
 
