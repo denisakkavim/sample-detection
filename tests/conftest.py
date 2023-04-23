@@ -21,20 +21,28 @@ def clip_length():
 
 
 @pytest.fixture
+def test_file_dir():
+    return Path(__file__).resolve().parent / "test_files"
+
+
+@pytest.fixture
+def sample_details_dir(test_file_dir):
+    return test_file_dir / "sample-details"
+
+
+@pytest.fixture()
+def sample_details_path(sample_details_dir):
+    return sample_details_dir / "sample_details.csv"
+
+
+@pytest.fixture
 def min_negatives():
     return 1
 
 
 @pytest.fixture
-def sample_info():
-    sample_info_path = (
-        Path(__file__).resolve().parent
-        / "test_files"
-        / "sample-details"
-        / "sample_details.csv"
-    )
-
-    sample_info = pd.read_csv(sample_info_path)
+def sample_info(sample_details_path):
+    sample_info = pd.read_csv(sample_details_path)
     sample_info["sample_in_times"] = sample_info["sample_in_times"].apply(literal_eval)
     sample_info["sample_from_times"] = sample_info["sample_from_times"].apply(
         literal_eval
