@@ -2,7 +2,6 @@ import logging
 import pytest
 import numpy as np
 
-from pathlib import Path
 from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
 
 
