@@ -3,7 +3,6 @@ import pytest
 import numpy as np
 
 from pathlib import Path
-from tests.conftest import clip_length, sample_rate
 from sample_detection.detect.embedding_generators.base import EmbeddingGenerator
 
 
