@@ -27,9 +27,8 @@ def min_negatives():
 
 @pytest.fixture
 def sample_info():
-
     sample_info_path = (
-        Path(__file__).resolve().parent.parent
+        Path(__file__).resolve().parent
         / "test_files"
         / "sample-details"
         / "sample_details.csv"

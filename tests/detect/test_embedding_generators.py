@@ -12,13 +12,12 @@ from sample_detection.detect.embedding_generators.wav2clip.generator import (
 
 logging.root.setLevel(logging.INFO)
 
-test_files_dir = Path(__file__).resolve().parent.parent.parent / "test_files"
+test_files_dir = Path(__file__).resolve().parent.parent / "test_files"
 audio_dir = test_files_dir / "audio"
 
 
 class DummyEmbeddingGenerator(EmbeddingGenerator):
     def __init__(self, sample_duration, sample_rate):
-
         super().__init__(sample_duration=sample_duration, sample_rate=sample_rate)
         self.logger = logging.getLogger(__name__)
 
@@ -27,7 +26,6 @@ class DummyEmbeddingGenerator(EmbeddingGenerator):
 
 
 def test_generate_embeddings_from_directory(clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -71,7 +69,6 @@ def test_generate_embeddings_from_directory(clip_length, sample_rate):
 
 
 def test_generate_embeddings_from_directory_logging(caplog, clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -109,7 +106,6 @@ def test_generate_embeddings_from_directory_logging(caplog, clip_length, sample_
 
 
 def test_wav2clip_embedding_generator_init(clip_length, sample_rate):
-
     embedding_generator = Wav2ClipEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -118,7 +114,6 @@ def test_wav2clip_embedding_generator_init(clip_length, sample_rate):
 
 
 def test_wav2clip_generate_embedding(clip_length, sample_rate, audio):
-
     embedding_generator = Wav2ClipEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -129,7 +124,6 @@ def test_wav2clip_generate_embedding(clip_length, sample_rate, audio):
 
 
 def test_load_audio(clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -141,7 +135,6 @@ def test_load_audio(clip_length, sample_rate):
 
 
 def test_load_audio_logging(caplog, clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -158,7 +151,6 @@ def test_load_audio_logging(caplog, clip_length, sample_rate):
 
 
 def test_load_sample(clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -199,7 +191,6 @@ def test_load_sample(clip_length, sample_rate):
 
 
 def test_load_sample_logging(caplog, clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -224,7 +215,6 @@ def test_load_sample_logging(caplog, clip_length, sample_rate):
 
 
 def test_load_sample_no_one_to_one_sample_match(clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -248,7 +238,6 @@ def test_load_sample_no_one_to_one_sample_match(clip_length, sample_rate):
 def test_load_sample_no_one_to_one_sample_match_logging(
     caplog, clip_length, sample_rate
 ):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -270,7 +259,6 @@ def test_load_sample_no_one_to_one_sample_match_logging(
 
 
 def test_load_sample_cannot_load_sample(clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )
@@ -292,7 +280,6 @@ def test_load_sample_cannot_load_sample(clip_length, sample_rate):
 
 
 def test_load_sample_cannot_load_sample_logging(caplog, clip_length, sample_rate):
-
     embedding_generator = DummyEmbeddingGenerator(
         sample_duration=clip_length, sample_rate=sample_rate
     )

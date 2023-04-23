@@ -4,9 +4,8 @@ from sample_detection.scrape.load import load_sample_info
 
 
 def test_load_sample_info():
-
     path = str(
-        Path(__file__).resolve().parent.parent.parent
+        Path(__file__).resolve().parent.parent
         / "test_files"
         / "sample-details"
         / "sample_details.csv"

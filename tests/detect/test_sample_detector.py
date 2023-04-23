@@ -7,19 +7,17 @@ from pathlib import Path
 from sample_detection.detect.sample_detector import SampleDetector
 from sample_detection.detect.audio import Audio
 
-test_files_dir = Path(__file__).resolve().parent.parent.parent / "test_files"
+test_files_dir = Path(__file__).resolve().parent.parent / "test_files"
 audio_dir = test_files_dir / "audio"
 
 
 def test_init(caplog, clip_length):
-
     with caplog.at_level(logging.INFO):
         model = SampleDetector(sample_duration=clip_length)
     assert "Setting random seed" in caplog.text
 
 
 def test_fit(sample_info, clip_length, min_negatives):
-
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
@@ -32,7 +30,6 @@ def test_fit(sample_info, clip_length, min_negatives):
 
 
 def test_predict_both_audio(sample_info, clip_length, min_negatives):
-
     model = SampleDetector(sample_duration=clip_length)
 
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
@@ -49,7 +46,6 @@ def test_predict_both_audio(sample_info, clip_length, min_negatives):
 
 
 def test_predict_both_embeddings(sample_info, clip_length, min_negatives):
-
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
@@ -62,7 +58,6 @@ def test_predict_both_embeddings(sample_info, clip_length, min_negatives):
 
 
 def test_predict_both_embeddings(sample_info, clip_length, min_negatives):
-
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
@@ -78,7 +73,6 @@ def test_predict_both_embeddings(sample_info, clip_length, min_negatives):
 def test_predict_both_embeddings_logging(
     caplog, sample_info, clip_length, min_negatives
 ):
-
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
@@ -94,7 +88,6 @@ def test_predict_both_embeddings_logging(
 
 
 def test_sample_detection(sample_info, clip_length, min_negatives):
-
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
