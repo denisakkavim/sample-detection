@@ -1,6 +1,5 @@
 import logging
 import numpy as np
-import pandas as pd
 
 from pathlib import Path
 
@@ -29,73 +28,66 @@ def test_fit(sample_info, clip_length, min_negatives):
     assert True
 
 
-def test_predict_both_audio(sample_info, clip_length, min_negatives):
+def test_predict_both_audio(
+    sample_info, clip_length, min_negatives, fan_noise_path, rain_noise_path
+):
     model = SampleDetector(sample_duration=clip_length)
 
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
-    audio_1_path = audio_dir / "fan_noise.mp3"
-    audio_2_path = audio_dir / "rain_noise.mp3"
-
-    audio_1 = Audio(path=audio_1_path, clip_length=clip_length)
-    audio_2 = Audio(path=audio_2_path, clip_length=clip_length)
+    audio_1 = Audio(path=fan_noise_path, clip_length=clip_length)
+    audio_2 = Audio(path=rain_noise_path, clip_length=clip_length)
 
     pred = model.predict(audio_1=audio_1, audio_2=audio_2)
 
     assert (pred >= 0) and (pred <= 1)
 
 
-def test_predict_both_embeddings(sample_info, clip_length, min_negatives):
+def test_predict_both_embeddings(sample_info, clip_length, min_negatives, embedding):
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
-    emb_1 = np.array([0 for i in range(512)])
-    emb_2 = np.array([1 for i in range(512)])
-
-    pred = model.predict(embedding_1=emb_1, embedding_2=emb_2)
+    pred = model.predict(embedding_1=embedding, embedding_2=embedding)
 
     assert (pred >= 0) and (pred <= 1)
 
 
-def test_predict_both_embeddings(sample_info, clip_length, min_negatives):
+def test_predict_mixed_audio_and_embedding(
+    sample_info, clip_length, min_negatives, embedding, fan_noise_path
+):
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
-    audio_path = audio_dir / "fan_noise.mp3"
-    audio = Audio(path=audio_path, clip_length=clip_length)
-    emb = np.array([1 for i in range(512)])
-
-    pred = model.predict(audio_1=audio, embedding_2=emb)
+    audio = Audio(path=fan_noise_path, clip_length=clip_length)
+    pred = model.predict(audio_1=audio, embedding_2=embedding)
 
     assert (pred >= 0) and (pred <= 1)
 
 
 def test_predict_both_embeddings_logging(
-    caplog, sample_info, clip_length, min_negatives
+    caplog, sample_info, clip_length, min_negatives, fan_noise_path, embedding
 ):
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
-    audio_path = audio_dir / "fan_noise.mp3"
-    audio = Audio(path=audio_path, clip_length=clip_length)
-    emb_1 = np.array([0 for i in range(512)])
-    emb_2 = np.array([1 for i in range(512)])
+    audio = Audio(path=fan_noise_path, clip_length=clip_length)
 
     with caplog.at_level(logging.INFO):
-        pred = model.predict(audio_1=audio, embedding_1=emb_1, embedding_2=emb_2)
+        pred = model.predict(
+            audio_1=audio, embedding_1=embedding, embedding_2=embedding
+        )
 
     assert "Both audio and an embedding have been passed in" in caplog.text
 
 
-def test_sample_detection(sample_info, clip_length, min_negatives):
+def test_sample_detection(
+    sample_info, clip_length, min_negatives, fan_noise_path, rain_noise_path
+):
     model = SampleDetector(sample_duration=clip_length)
     model.fit(sample_info=sample_info, audio_dir=audio_dir, min_negatives=min_negatives)
 
-    audio_1_path = audio_dir / "fan_noise.mp3"
-    audio_2_path = audio_dir / "rain_noise.mp3"
-
-    audio_1 = Audio(path=audio_1_path, clip_length=clip_length)
-    audio_2 = Audio(path=audio_2_path, clip_length=clip_length)
+    audio_1 = Audio(path=fan_noise_path, clip_length=clip_length)
+    audio_2 = Audio(path=rain_noise_path, clip_length=clip_length)
 
     found_samples = model.find_samples(audio_1=audio_1, audio_2=audio_2, threshold=0)
 
