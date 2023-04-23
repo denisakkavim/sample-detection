@@ -4,7 +4,6 @@ __pycache__/
 
 #Virtual Environment
 .sample-detection
-.python-version
 
 # C extensions
 *.so
