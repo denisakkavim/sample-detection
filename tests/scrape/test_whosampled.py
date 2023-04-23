@@ -15,13 +15,14 @@ def test_get_samples_on_page(
     assert scraper_songs_in_sample_list == test_songs_in_sample_list
 
 
-def test_get_sample_details(monkeypatch, sample_url, mock_response, sample_details):
+def test_get_sample_details(
+    monkeypatch, whosampled_scraper, sample_url, mock_response, sample_details
+):
     def mock_urlopen(*args, **kwargs):
         return mock_response
 
     monkeypatch.setattr(urllib.request, "urlopen", mock_urlopen)
 
-    whosampled_scraper = WhosampledScraper()
     scraped_sample_details = whosampled_scraper.get_sample_details(sample_url)
     test_sample_details = sample_details
 
