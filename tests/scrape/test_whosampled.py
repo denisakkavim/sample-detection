@@ -1,7 +1,5 @@
 import urllib.request
 
-from sample_detection.scrape.whosampled import WhosampledScraper
-
 
 def test_get_samples_on_page(
     whosampled_scraper, songs_in_sample_list, sample_list_html
