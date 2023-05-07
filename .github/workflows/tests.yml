@@ -37,5 +37,5 @@ jobs:
         run: pip install .
 
       - name: Run tests
-        run: pytest tests/unit*
+        run: pytest tests
         
