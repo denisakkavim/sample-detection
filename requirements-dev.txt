@@ -10,7 +10,7 @@ scipy==1.8.1
 termcolor==1.1.0
 torch==1.13.1
 torchaudio==0.13.1
-torchvision==0.13.1
+torchvision==0.14.1
 wav2clip==0.1.0
 yt-dlp==2022.5.18
 
