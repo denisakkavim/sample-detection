@@ -8,10 +8,10 @@ from typing import Dict, List
 from urllib.error import URLError
 from urllib.parse import urljoin
 
-from sample_detection.scrape.base import BaseScraper
+from sample_detection.scrape.base import HTMLScraper
 
 
-class WhosampledScraper(BaseScraper):
+class WhosampledScraper(HTMLScraper):
     def __init__(self, attempts_per_page: int = 10, wait_between_attempts: int = 30):
         """Create a WhoSampled Scraper.
 

@@ -5,21 +5,34 @@ import subprocess
 from glob import glob
 from typing import Optional, Iterable
 
-from sample_detection.scrape.base import BaseScraper
 
-
-class YoutubeScraper(BaseScraper):
+class YoutubeScraper:
     def __init__(self, save_dir):
-
         super().__init__()
 
         self.logger = logging.getLogger(__name__)
         self.save_dir = save_dir
 
+    @staticmethod
+    def extract_filename_from_filepath(path: str) -> str:
+        """Given a path to a file, extract the name of the file without the extension.
+
+        :param path: path to file
+        :type path: str
+
+        :return: filename of file in path
+        :rtype: str
+        """
+
+        ID_SPLIT_INDEX = 0
+
+        filename = os.path.basename(path).split(".")[ID_SPLIT_INDEX]
+
+        return filename
+
     def download_youtube_audio(
         self, youtube_id: str, file_name: Optional[str] = None
     ) -> bool:
-
         """Download audio from a given YouTube video.
 
         :param youtube_id: The ID of the YouTube video to download
@@ -57,7 +70,6 @@ class YoutubeScraper(BaseScraper):
         return True
 
     def scrape(self, youtube_ids: Iterable[str]) -> bool:
-
         """Download the audio for the videos with the given YouTube IDs, and save them in save_dir.
 
         :param youtube_ids: IDs of YouTube videos to download the audio from

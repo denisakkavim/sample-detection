@@ -8,7 +8,7 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError
 
 
-class BaseScraper(ABC):
+class HTMLScraper:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
@@ -60,24 +60,3 @@ class BaseScraper(ABC):
             )
 
         return BeautifulSoup(markup=content, features="html.parser")
-
-    @staticmethod
-    def extract_filename_from_filepath(path: str) -> str:
-        """Given a path to a file, extract the name of the file without the extension.
-
-        :param path: path to file
-        :type path: str
-
-        :return: filename of file in path
-        :rtype: str
-        """
-
-        ID_SPLIT_INDEX = 0
-
-        filename = os.path.basename(path).split(".")[ID_SPLIT_INDEX]
-
-        return filename
-
-    @abstractmethod
-    def scrape(self):
-        pass
