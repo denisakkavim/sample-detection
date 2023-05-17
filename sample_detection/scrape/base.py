@@ -1,19 +1,17 @@
 import logging
-import os
 
-from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from time import sleep
 from urllib.request import Request, urlopen
 from urllib.error import URLError
 
 
-class BaseScraper(ABC):
+class HTMLScraper:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
     def get_web_page(
-        self, url: str, attempts: int = 5, wait_between_attempts: int = 10
+        self, url: str, attempts: int = 5, retry_after_seconds: int = 10
     ) -> BeautifulSoup:
         """Gets the HTML content of a webpage.
 
@@ -52,32 +50,11 @@ class BaseScraper(ABC):
             self.logger.warning(f"Failed to get page at {url}")
 
             # If we get a URL error or a TimeoutError, wait before trying again:
-            sleep(wait_between_attempts)
+            sleep(retry_after_seconds)
             content = self.get_web_page(
-                url=url,
-                attempts=attempts - 1,
-                wait_between_attempts=wait_between_attempts,
+                url,
+                attempts - 1,
+                retry_after_seconds,
             )
 
         return BeautifulSoup(markup=content, features="html.parser")
-
-    @staticmethod
-    def extract_filename_from_filepath(path: str) -> str:
-        """Given a path to a file, extract the name of the file without the extension.
-
-        :param path: path to file
-        :type path: str
-
-        :return: filename of file in path
-        :rtype: str
-        """
-
-        ID_SPLIT_INDEX = 0
-
-        filename = os.path.basename(path).split(".")[ID_SPLIT_INDEX]
-
-        return filename
-
-    @abstractmethod
-    def scrape(self):
-        pass

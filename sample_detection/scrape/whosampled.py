@@ -8,11 +8,11 @@ from typing import Dict, List
 from urllib.error import URLError
 from urllib.parse import urljoin
 
-from sample_detection.scrape.base import BaseScraper
+from sample_detection.scrape.base import HTMLScraper
 
 
-class WhosampledScraper(BaseScraper):
-    def __init__(self, attempts_per_page: int = 10, wait_between_attempts: int = 30):
+class WhosampledScraper(HTMLScraper):
+    def __init__(self, attempts_per_page: int = 5, retry_after_seconds: int = 10):
         """Create a WhoSampled Scraper.
 
         :param attempts_per_page: Number of attempts that should be made to load a given page
@@ -25,9 +25,9 @@ class WhosampledScraper(BaseScraper):
         super().__init__()
 
         self.logger = logging.getLogger(__name__)
-        self.base_url = "http://173.192.193.226"
+        self.base_url = "https://whosampled.com"
         self.attempts_per_page = attempts_per_page
-        self.wait_between_attempts = wait_between_attempts
+        self.retry_after_seconds = retry_after_seconds
 
     def get_samples_on_page(self, page: BeautifulSoup) -> List[str]:
         """Get the URLs of all samples on the a given WhoSampled page.
@@ -81,7 +81,7 @@ class WhosampledScraper(BaseScraper):
             sample_page = self.get_web_page(
                 absolute_url,
                 attempts=self.attempts_per_page,
-                wait_between_attempts=self.wait_between_attempts,
+                retry_after_seconds=self.retry_after_seconds,
             )
             sample_boxes = sample_page.find_all(
                 name="div", attrs={"class": "sampleEntryBox"}
@@ -149,7 +149,7 @@ class WhosampledScraper(BaseScraper):
 
             pass
 
-    def scrape(
+    def get_samples_between_years(
         self, start_year: int = 2010, end_year: int = 2020, pages_per_year: int = 50
     ) -> pd.DataFrame:
         """Scrape WhoSample for samples in between (and including) the start and end year. Goes through pages_per_year
@@ -175,17 +175,17 @@ class WhosampledScraper(BaseScraper):
 
         self.logger.info("Getting sample details from WhoSampled.")
 
-        for year, browse_page in pages_to_scrape:
+        for year, browse_page_number in pages_to_scrape:
             try:
-                browse_page_url = (
-                    f"{self.base_url}/browse/year/{year}/samples/{browse_page}/"
+                url = (
+                    f"{self.base_url}/browse/year/{year}/samples/{browse_page_number}/"
                 )
-                browse_page = self.get_web_page(
-                    url=browse_page_url,
+                page = self.get_web_page(
+                    url,
                     attempts=self.attempts_per_page,
                     wait_between_attempts=self.wait_between_attempts,
                 )
-                sample_urls_on_page = self.get_samples_on_page(page=browse_page)
+                sample_urls_on_page = self.get_samples_on_page(page)
                 sample_details = sample_details + [
                     self.get_sample_details(sample_url=url)
                     for url in sample_urls_on_page
