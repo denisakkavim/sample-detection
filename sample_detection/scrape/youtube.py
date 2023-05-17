@@ -3,35 +3,36 @@ import os
 import subprocess
 
 from glob import glob
-from typing import Optional, Iterable
+from pathlib import Path
+from typing import Optional, Iterable, Union
 
 
-class YoutubeScraper:
-    def __init__(self, save_dir):
-        super().__init__()
+def extract_filename_from_filepath(path: str) -> str:
+    """Given a path to a file, extract the name of the file without the extension.
 
+    :param path: path to file
+    :type path: str
+
+    :return: filename of file in path
+    :rtype: str
+    """
+
+    ID_SPLIT_INDEX = 0
+
+    filename = os.path.basename(path).split(".")[ID_SPLIT_INDEX]
+
+    return filename
+
+
+class YoutubeAudioScraper:
+    def __init__(self):
         self.logger = logging.getLogger(__name__)
-        self.save_dir = save_dir
 
-    @staticmethod
-    def extract_filename_from_filepath(path: str) -> str:
-        """Given a path to a file, extract the name of the file without the extension.
-
-        :param path: path to file
-        :type path: str
-
-        :return: filename of file in path
-        :rtype: str
-        """
-
-        ID_SPLIT_INDEX = 0
-
-        filename = os.path.basename(path).split(".")[ID_SPLIT_INDEX]
-
-        return filename
-
-    def download_youtube_audio(
-        self, youtube_id: str, file_name: Optional[str] = None
+    def _scrape_audio(
+        self,
+        youtube_id: str,
+        save_dir: Union[Path, str],
+        file_name: Optional[str] = None,
     ) -> bool:
         """Download audio from a given YouTube video.
 
@@ -53,7 +54,7 @@ class YoutubeScraper:
         self.logger.info(f"Downloading YouTube ID {youtube_id}.")
 
         try:
-            command = f"yt-dlp -f 'ba' -x --audio-format mp3 {url} -o {self.save_dir}/{file_name}.mp3"
+            command = f"yt-dlp -f 'ba' -x --audio-format mp3 {url} -o {save_dir}/{file_name}.mp3"
             subprocess.run(
                 command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
             )
@@ -69,7 +70,9 @@ class YoutubeScraper:
 
         return True
 
-    def scrape(self, youtube_ids: Iterable[str]) -> bool:
+    def download_audio_for_ids(
+        self, youtube_ids: Iterable[str], save_dir: Union[Path, str]
+    ) -> bool:
         """Download the audio for the videos with the given YouTube IDs, and save them in save_dir.
 
         :param youtube_ids: IDs of YouTube videos to download the audio from
@@ -82,8 +85,8 @@ class YoutubeScraper:
 
         # Check if any songs have already been downloaded, and if yes, exclude them from the set of songs to download:
         ids_already_downloaded = {
-            self.extract_filename_from_filepath(path)
-            for path in glob(os.path.join(self.save_dir, "*.mp3"))
+            extract_filename_from_filepath(path)
+            for path in glob(os.path.join(save_dir, "*.mp3"))
         }
         ids_to_download = youtube_ids - ids_already_downloaded
 
@@ -96,6 +99,6 @@ class YoutubeScraper:
             self.logger.info("Downloading remaining YouTube IDs...")
 
         for id in ids_to_download:
-            self.download_youtube_audio(youtube_id=id)
+            self._scrape_audio(youtube_id=id)
 
         return True

@@ -11,7 +11,7 @@ class HTMLScraper:
         self.logger = logging.getLogger(__name__)
 
     def get_web_page(
-        self, url: str, attempts: int = 5, wait_between_attempts: int = 10
+        self, url: str, attempts: int = 5, retry_after_seconds: int = 10
     ) -> BeautifulSoup:
         """Gets the HTML content of a webpage.
 
@@ -50,11 +50,11 @@ class HTMLScraper:
             self.logger.warning(f"Failed to get page at {url}")
 
             # If we get a URL error or a TimeoutError, wait before trying again:
-            sleep(wait_between_attempts)
+            sleep(retry_after_seconds)
             content = self.get_web_page(
-                url=url,
-                attempts=attempts - 1,
-                wait_between_attempts=wait_between_attempts,
+                url,
+                attempts - 1,
+                retry_after_seconds,
             )
 
         return BeautifulSoup(markup=content, features="html.parser")
