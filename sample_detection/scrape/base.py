@@ -1,7 +1,5 @@
 import logging
-import os
 
-from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from time import sleep
 from urllib.request import Request, urlopen
