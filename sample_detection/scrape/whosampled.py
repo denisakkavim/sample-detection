@@ -175,17 +175,17 @@ class WhosampledScraper(HTMLScraper):
 
         self.logger.info("Getting sample details from WhoSampled.")
 
-        for year, browse_page in pages_to_scrape:
+        for year, browse_page_number in pages_to_scrape:
             try:
-                browse_page_url = (
-                    f"{self.base_url}/browse/year/{year}/samples/{browse_page}/"
+                url = (
+                    f"{self.base_url}/browse/year/{year}/samples/{browse_page_number}/"
                 )
-                browse_page = self.get_web_page(
-                    url=browse_page_url,
+                page = self.get_web_page(
+                    url,
                     attempts=self.attempts_per_page,
                     wait_between_attempts=self.wait_between_attempts,
                 )
-                sample_urls_on_page = self.get_samples_on_page(page=browse_page)
+                sample_urls_on_page = self.get_samples_on_page(page)
                 sample_details = sample_details + [
                     self.get_sample_details(sample_url=url)
                     for url in sample_urls_on_page
