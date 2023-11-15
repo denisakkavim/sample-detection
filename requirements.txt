@@ -12,4 +12,4 @@ torch==1.13.1
 torchaudio==0.13.1
 torchvision==0.14.1
 wav2clip==0.1.0
-yt-dlp==2023.9.24
+yt-dlp==2023.11.14
